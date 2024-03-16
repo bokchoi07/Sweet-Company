@@ -1,51 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = .25f;
-    //[SerializeField] float turnSpeed = .25f;
+    [SerializeField] private float moveSpeed = .25f;
 
-    Rigidbody rb = null;
-
-    private void Awake()
+    private void Update()
     {
-        rb = GetComponent<Rigidbody>();
-    }
+        Vector2 inputVector = new Vector2(0, 0);
 
-    private void FixedUpdate()
-    {
-        MoveVertical();
-        MoveHorizontal();
-        //Turn();
-    }
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            inputVector.y = +1;
+        }
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            inputVector.x = -1;
+        }
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            inputVector.y = -1;
+        }
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            inputVector.x = +1;
+        }
 
-    public void MoveVertical()
-    {
-        float moveAmountThisFrame = Input.GetAxis("Vertical") * moveSpeed;
-        Vector3 moveOffset = transform.forward * moveAmountThisFrame;
-        rb.MovePosition(rb.position + moveOffset);
-    }
+        inputVector = inputVector.normalized;
 
-    public void MoveHorizontal()
-    {
-        float moveAmountThisFrame = Input.GetAxis("Horizontal") * moveSpeed;
-        Vector3 moveOffset = transform.right * moveAmountThisFrame;
-        rb.MovePosition(rb.position + moveOffset);
-    }
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+        transform.position += moveDir * moveSpeed * Time.deltaTime;
 
-    /*public void Move()
-    {
-        float moveAmountThisFrame = Input.GetAxis("Vertical") * moveSpeed;
-        Vector3 moveOffset = transform.forward * moveAmountThisFrame;
-        rb.MovePosition(rb.position + moveOffset);
-    }*/
-
-    public void Turn()
-    {
-        /*float turnAmountThisFrame = Input.GetAxis("Horizontal") * turnSpeed;
-        Quaternion turnOffset = Quaternion.Euler(0, turnAmountThisFrame, 0);
-        rb.MoveRotation(rb.rotation * turnOffset);*/
+        transform.forward = moveDir;
     }
 }
