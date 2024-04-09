@@ -4,48 +4,100 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = .25f;
-    //[SerializeField] float turnSpeed = .25f;
+    [SerializeField] private float moveSpeed = .12f;
+    [SerializeField] private GameInput gameInput;
+    [SerializeField] private LayerMask layerMask;
 
-    Rigidbody rb = null;
+    private bool isWalking;
+    private Vector3 lastInteractDir;
 
-    private void Awake()
+    private void Update()
     {
-        rb = GetComponent<Rigidbody>();
+        HandleInteraction();
+        HandleMovement();
     }
 
-    private void FixedUpdate()
+    public bool IsWalking()
     {
-        MoveVertical();
-        MoveHorizontal();
-        //Turn();
+        return isWalking;
     }
 
-    public void MoveVertical()
+    private void HandleInteraction()
     {
-        float moveAmountThisFrame = Input.GetAxis("Vertical") * moveSpeed;
-        Vector3 moveOffset = transform.forward * moveAmountThisFrame;
-        rb.MovePosition(rb.position + moveOffset);
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        if (moveDir != Vector3.zero)
+        {
+            lastInteractDir = moveDir;
+        }
+
+        float interactDistance = 2f;
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance))
+        {
+            if (raycastHit.transform.TryGetComponent(out KitchenCounter kitchenCounter))
+            {
+                kitchenCounter.Interact();
+            }
+        }
+        else
+        {
+            Debug.Log("-");
+        }
     }
 
-    public void MoveHorizontal()
+    private void HandleMovement()
     {
-        float moveAmountThisFrame = Input.GetAxis("Horizontal") * moveSpeed;
-        Vector3 moveOffset = transform.right * moveAmountThisFrame;
-        rb.MovePosition(rb.position + moveOffset);
-    }
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
-    /*public void Move()
-    {
-        float moveAmountThisFrame = Input.GetAxis("Vertical") * moveSpeed;
-        Vector3 moveOffset = transform.forward * moveAmountThisFrame;
-        rb.MovePosition(rb.position + moveOffset);
-    }*/
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
-    public void Turn()
-    {
-        /*float turnAmountThisFrame = Input.GetAxis("Horizontal") * turnSpeed;
-        Quaternion turnOffset = Quaternion.Euler(0, turnAmountThisFrame, 0);
-        rb.MoveRotation(rb.rotation * turnOffset);*/
+        float moveDistance = moveSpeed * Time.deltaTime;
+        float playerRadius = .7f;
+        float playerHeight = 2f;
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance);
+
+        if (!canMove)
+        {
+            // Cannot move towards moveDir
+
+            // Attempt only X movement
+            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
+            canMove = (moveDir.x < -.5f || moveDir.x > +.5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
+
+            if (canMove)
+            {
+                // Can move only on the X
+                moveDir = moveDirX;
+            }
+            else
+            {
+                // Cannot move only on the X
+
+                // Attempt only Z movement
+                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
+                canMove = (moveDir.z < -.5f || moveDir.z > +.5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+
+                if (canMove)
+                {
+                    // Can move only on the Z
+                    moveDir = moveDirZ;
+                }
+                else
+                {
+                    // Cannot move in any direction
+                }
+            }
+        }
+
+        if (canMove)
+        {
+            transform.position += moveDir * moveDistance;
+        }
+
+        isWalking = moveDir != Vector3.zero;
+
+        float rotateSpeed = 10f;
+        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
     }
 }
