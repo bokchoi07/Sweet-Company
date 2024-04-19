@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &996694368733125684
+--- !u!1 &3396267977199955511
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8956578682671610012}
-  - component: {fileID: 3874571553018207548}
+  - component: {fileID: 5159727009533701726}
+  - component: {fileID: 1513784989661030380}
   m_Layer: 6
-  m_Name: KitchenCounter_Selected
+  m_Name: ContainerCounter_Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8956578682671610012
+--- !u!4 &5159727009533701726
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996694368733125684}
+  m_GameObject: {fileID: 3396267977199955511}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.01, y: 1.01, z: 1.01}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 6752923137151174503}
-  m_Father: {fileID: 6278151068835888371}
+  - {fileID: 2668268882486404130}
+  m_Father: {fileID: 5739350021772930925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3874571553018207548
+--- !u!114 &1513784989661030380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996694368733125684}
+  m_GameObject: {fileID: 3396267977199955511}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: befb2ec7661e77048bf53dbf87542853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseCounter: {fileID: 3535309928348313943}
+  baseCounter: {fileID: 8205411527397906764}
   visualGameObjectArray:
-  - {fileID: 1111321863375307505}
---- !u!1 &1111321863375307505
+  - {fileID: 6942220101531448940}
+--- !u!1 &4471293166697231027
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,10 +56,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6752923137151174503}
-  - component: {fileID: 9169793828929529908}
-  - component: {fileID: 4081521074639704838}
-  - component: {fileID: 1670668175002604867}
+  - component: {fileID: 474569137130934148}
+  m_Layer: 6
+  m_Name: ContainerCounter_Visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &474569137130934148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4471293166697231027}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5450939303529051957}
+  m_Father: {fileID: 5739350021772930925}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6942220101531448940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2668268882486404130}
+  - component: {fileID: 296591021658639823}
+  - component: {fileID: 6977648429851528139}
+  - component: {fileID: 8482329399556588585}
   m_Layer: 0
   m_Name: kitchen_stand_3 (1)
   m_TagString: Untagged
@@ -67,36 +99,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &6752923137151174503
+--- !u!4 &2668268882486404130
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111321863375307505}
+  m_GameObject: {fileID: 6942220101531448940}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8956578682671610012}
+  m_Father: {fileID: 5159727009533701726}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &9169793828929529908
+--- !u!33 &296591021658639823
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111321863375307505}
+  m_GameObject: {fileID: 6942220101531448940}
   m_Mesh: {fileID: 4300000, guid: 30da8ff4471b5d74c9750fbf3c807ef9, type: 3}
---- !u!23 &4081521074639704838
+--- !u!23 &6977648429851528139
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111321863375307505}
+  m_GameObject: {fileID: 6942220101531448940}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -132,13 +164,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1670668175002604867
+--- !u!64 &8482329399556588585
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111321863375307505}
+  m_GameObject: {fileID: 6942220101531448940}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -154,7 +186,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 30da8ff4471b5d74c9750fbf3c807ef9, type: 3}
---- !u!1 &6382374924072024117
+--- !u!1 &9195485424046691119
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,42 +194,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 612012375184998317}
-  m_Layer: 6
-  m_Name: KitchenCounter_Visual
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &612012375184998317
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6382374924072024117}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8516511179313530551}
-  m_Father: {fileID: 6278151068835888371}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8346933217420701718
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8516511179313530551}
-  - component: {fileID: 5884961311263300418}
-  - component: {fileID: 669095913071731024}
-  - component: {fileID: 1603841693424413188}
+  - component: {fileID: 5450939303529051957}
+  - component: {fileID: 1728913142406307884}
+  - component: {fileID: 2477452734014737540}
+  - component: {fileID: 5473387463107828020}
   m_Layer: 0
   m_Name: kitchen_stand_3 (1)
   m_TagString: Untagged
@@ -205,36 +205,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8516511179313530551
+--- !u!4 &5450939303529051957
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8346933217420701718}
+  m_GameObject: {fileID: 9195485424046691119}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 612012375184998317}
+  m_Father: {fileID: 474569137130934148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5884961311263300418
+--- !u!33 &1728913142406307884
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8346933217420701718}
+  m_GameObject: {fileID: 9195485424046691119}
   m_Mesh: {fileID: 4300000, guid: 30da8ff4471b5d74c9750fbf3c807ef9, type: 3}
---- !u!23 &669095913071731024
+--- !u!23 &2477452734014737540
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8346933217420701718}
+  m_GameObject: {fileID: 9195485424046691119}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -270,13 +270,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1603841693424413188
+--- !u!64 &5473387463107828020
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8346933217420701718}
+  m_GameObject: {fileID: 9195485424046691119}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -292,7 +292,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 30da8ff4471b5d74c9750fbf3c807ef9, type: 3}
---- !u!1001 &7354605252122318486
+--- !u!1001 &9121746166787949832
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -300,10 +300,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 367610012271616252, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.332
-      objectReference: {fileID: 0}
     - target: {fileID: 3544534808787593829, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -346,47 +342,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7356750164411537488, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
       propertyPath: m_Name
-      value: KitchenCounter
+      value: ContainerCounter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3544534808787593829, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
       insertIndex: 0
-      addedObject: {fileID: 612012375184998317}
+      addedObject: {fileID: 474569137130934148}
     - targetCorrespondingSourceObject: {fileID: 3544534808787593829, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 8956578682671610012}
+      addedObject: {fileID: 5159727009533701726}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7356750164411537488, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3535309928348313943}
+      addedObject: {fileID: 8205411527397906764}
   m_SourcePrefab: {fileID: 100100000, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
---- !u!1 &2431884855529158 stripped
+--- !u!1 &1769525996490759512 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7356750164411537488, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
-  m_PrefabInstance: {fileID: 7354605252122318486}
+  m_PrefabInstance: {fileID: 9121746166787949832}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3535309928348313943
+--- !u!114 &8205411527397906764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2431884855529158}
+  m_GameObject: {fileID: 1769525996490759512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f351dc6f6e4c2648b3123cc1bcec1cf, type: 3}
+  m_Script: {fileID: 11500000, guid: dd12909b5667cf446a0581387293d351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counterTopPoint: {fileID: 7136742893270251114}
---- !u!4 &6278151068835888371 stripped
+  counterTopPoint: {fileID: 8902755084132083188}
+  kitchenIngredientSO: {fileID: 11400000, guid: 4a7b31f6a24ca014dad771e1c0975078, type: 2}
+--- !u!4 &5739350021772930925 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3544534808787593829, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
-  m_PrefabInstance: {fileID: 7354605252122318486}
+  m_PrefabInstance: {fileID: 9121746166787949832}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &7136742893270251114 stripped
+--- !u!4 &8902755084132083188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 367610012271616252, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
-  m_PrefabInstance: {fileID: 7354605252122318486}
+  m_PrefabInstance: {fileID: 9121746166787949832}
   m_PrefabAsset: {fileID: 0}
