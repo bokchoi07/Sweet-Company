@@ -35,13 +35,23 @@ public class PlayerController : MonoBehaviour, IKitchenIngredientParent
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnInteractAltAction += GameInput_OnInteractAltAction;
     }
+
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
         if (selectedCounter != null)
         {
             selectedCounter.Interact(this);
+        }
+    }
+
+    private void GameInput_OnInteractAltAction(object sender, EventArgs e)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.InteractAlt(this);
         }
     }
 
@@ -104,7 +114,7 @@ public class PlayerController : MonoBehaviour, IKitchenIngredientParent
 
             // Attempt only X movement
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = (moveDir.x < -.5f || moveDir.x > +.5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
+            canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
 
             if (canMove)
             {

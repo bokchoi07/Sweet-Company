@@ -15,8 +15,7 @@ public class ContainerCounter : BaseCounter
         {
             // player is not holding anything
             // let player grab container counter's ingredient
-            Transform kitchenIngredientTransform = Instantiate(kitchenIngredientSO.prefab);
-            kitchenIngredientTransform.GetComponent<KitchenIngredient>().SetKitchenIngredientParent(player);
+            KitchenIngredient.SpawnKitchenIngredient(kitchenIngredientSO, player);
 
             OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
         }

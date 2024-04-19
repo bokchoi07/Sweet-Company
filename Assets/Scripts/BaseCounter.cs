@@ -13,6 +13,11 @@ public class BaseCounter : MonoBehaviour, IKitchenIngredientParent
         Debug.LogError("BaseCounter.Interact();");
     }
 
+    public virtual void InteractAlt(PlayerController player)
+    {
+        Debug.LogError("BaseCounter.InteractAlt();");
+    }
+
     public Transform GetKitchenIngredientFollowTransform()
     {
         return counterTopPoint;
