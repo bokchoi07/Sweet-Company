@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c8ea5b87b359e8488d90b6645ed284b, type: 3}
-  m_Name: IceCube
+  m_Name: TeaLeaves
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7567019431801701149, guid: e12cc47a8d304aa45b9fe089490942b9, type: 3}
-  ingredientName: IceCube
+  prefab: {fileID: 7567019431801701149, guid: 8607726175980eb469869ea250ebead5, type: 3}
+  ingredientName: TeaLeaves

@@ -2,65 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KitchenCounter : MonoBehaviour
+public class KitchenCounter : BaseCounter
 {
-    [SerializeField] private KitchenIngredientSO kitchenIngredientSO;
-    [SerializeField] private Transform counterTopPoint;
-    [SerializeField] private KitchenCounter secondKitchenCounter;
-    [SerializeField] private bool testing;
+    //[SerializeField] private KitchenIngredientSO kitchenIngredientSO;
 
-    private KitchenIngredient kitchenIngredient;
-
-    private void Update()
+    public override void Interact(PlayerController player)
     {
-        if (testing && Input.GetKeyDown(KeyCode.T))
+        if (!HasKitchenIngredient())
         {
-            if (kitchenIngredient != null)
+            // there's no kitchen ingredient on the counter
+            if (player.HasKitchenIngredient())
             {
-                kitchenIngredient.SetKitchenCounter(secondKitchenCounter);
+                // player is holding something
+                player.GetKitchenIngredient().SetKitchenIngredientParent(this);
             }
-        }
-    }
-
-    public void Interact()
-    {
-        if (kitchenIngredient == null)
-        {
-            Transform kitchenIngredientTransform = Instantiate(kitchenIngredientSO.prefab, counterTopPoint);
-            kitchenIngredientTransform.GetComponent<KitchenIngredient>().SetKitchenCounter(this);
-            kitchenIngredientTransform.localPosition = Vector3.zero;
-
-            kitchenIngredient = kitchenIngredientTransform.GetComponent<KitchenIngredient>();
-            kitchenIngredient.SetKitchenCounter(this);
+            else
+            {
+                // player is not holding anything
+            }
         }
         else
         {
-            Debug.Log(kitchenIngredient.GetKitchenCounter());
+            // there is a kitchen ingredient on the counter
+            if (player.HasKitchenIngredient())
+            {
+                // player is holding something
+            }
+            else
+            {
+                // player is not holding anything
+                // give kitchen ingredient to player to pick up
+                GetKitchenIngredient().SetKitchenIngredientParent(player);
+            }
         }
-    }
-
-    public Transform GetKitchenIngredientFollowTransform()
-    {
-        return counterTopPoint;
-    }
-
-    public void SetKitchenIngredient(KitchenIngredient kitchenIngredient)
-    {
-        this.kitchenIngredient = kitchenIngredient;
-    }
-
-    public KitchenIngredient GetKitchenIngredient()
-    {
-        return kitchenIngredient;
-    }
-
-    public void ClearKitchenIngredient()
-    {
-        kitchenIngredient = null;
-    }
-
-    public bool hasKitchenIngredient()
-    {
-        return kitchenIngredient != null;
     }
 }
