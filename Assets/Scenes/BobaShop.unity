@@ -158,13 +158,13 @@ Transform:
   - {fileID: 661940987}
   - {fileID: 1407942474}
   - {fileID: 609787236}
+  - {fileID: 1616792122}
   - {fileID: 1895747362}
   - {fileID: 715926087}
   - {fileID: 1150320122}
   - {fileID: 2039462962}
   - {fileID: 1513814025}
   - {fileID: 239941066}
-  - {fileID: 1616792122}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &18803579
@@ -1801,7 +1801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1099365174}
   - component: {fileID: 1099365176}
-  - component: {fileID: 1099365175}
+  - component: {fileID: 1099365177}
   m_Layer: 0
   m_Name: CapsulePlayer
   m_TagString: Untagged
@@ -1828,24 +1828,6 @@ Transform:
   - {fileID: 2019140791}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1099365175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1099365173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52ba40ffabfe99446877c32490aff0a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 6
-  gameInput: {fileID: 745475302}
-  countersLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  kitchenIngredientHoldPoint: {fileID: 2019140791}
 --- !u!136 &1099365176
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1865,10 +1847,28 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.53511584
+  m_Height: 1.1145363
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.035115838}
+--- !u!114 &1099365177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099365173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a1057f446fa624d822dc132fc592d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 6
+  gameInput: {fileID: 745475302}
+  countersLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  kitchenIngredientHoldPoint: {fileID: 2019140791}
 --- !u!1 &1104179796
 GameObject:
   m_ObjectHideFlags: 0
@@ -2063,7 +2063,6 @@ GameObject:
   - component: {fileID: 1245448923}
   - component: {fileID: 1245448926}
   - component: {fileID: 1245448925}
-  - component: {fileID: 1245448924}
   m_Layer: 0
   m_Name: Backpack
   m_TagString: Untagged
@@ -2086,27 +2085,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1099365174}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1245448924
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245448922}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1245448925
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3147,7 +3125,6 @@ GameObject:
   - component: {fileID: 2009152288}
   - component: {fileID: 2009152291}
   - component: {fileID: 2009152290}
-  - component: {fileID: 2009152292}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -3220,24 +3197,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009152287}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2009152292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009152287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52ba40ffabfe99446877c32490aff0a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0.12
-  gameInput: {fileID: 745475302}
-  countersLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  kitchenIngredientHoldPoint: {fileID: 0}
 --- !u!1 &2019140790
 GameObject:
   m_ObjectHideFlags: 0

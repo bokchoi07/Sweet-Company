@@ -15,7 +15,7 @@ public class BrewingCounter : BaseCounter
 
     private int brewingProgress;
 
-    public override void Interact(PlayerController player)
+    public override void Interact(BobaShopPlayerController player)
     {
         if (!HasKitchenIngredient())
         {
@@ -61,7 +61,7 @@ public class BrewingCounter : BaseCounter
         }
     }
 
-    public override void InteractAlt(PlayerController player)
+    public override void InteractAlt(BobaShopPlayerController player)
     {
         // if there is KitchenIngredient here AND it can be brewed
         if (HasKitchenIngredient() && HasRecipeWithInput(GetKitchenIngredient().GetKitchenIngredientSO()))

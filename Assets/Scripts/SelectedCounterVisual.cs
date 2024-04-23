@@ -8,10 +8,10 @@ public class SelectedCounterVisual : MonoBehaviour
     [SerializeField] private GameObject[] visualGameObjectArray;
     private void Start()
     {
-        PlayerController.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
+        BobaShopPlayerController.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
     }
 
-    private void Player_OnSelectedCounterChanged(object sender, PlayerController.OnSelectedCounterChangedEventArgs e)
+    private void Player_OnSelectedCounterChanged(object sender, BobaShopPlayerController.OnSelectedCounterChangedEventArgs e)
     {
         if (e.selectedCounter == baseCounter)
         {

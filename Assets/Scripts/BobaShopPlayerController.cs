@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IKitchenIngredientParent
+public class BobaShopPlayerController : MonoBehaviour, IKitchenIngredientParent
 {
-    public static PlayerController Instance { get; private set; }
+    public static BobaShopPlayerController Instance { get; private set; }
 
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs
@@ -75,12 +75,12 @@ public class PlayerController : MonoBehaviour, IKitchenIngredientParent
                 {
                     SetSelectedCounter(baseCounter);
                 }
-            } 
+            }
             else
             {
                 SetSelectedCounter(null);
             }
-        } 
+        }
         else
         {
             SetSelectedCounter(null);

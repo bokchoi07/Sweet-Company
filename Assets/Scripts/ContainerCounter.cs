@@ -9,7 +9,7 @@ public class ContainerCounter : BaseCounter
 
     [SerializeField] private KitchenIngredientSO kitchenIngredientSO;
 
-    public override void Interact(PlayerController player)
+    public override void Interact(BobaShopPlayerController player)
     {
         if (!player.HasKitchenIngredient())
         {

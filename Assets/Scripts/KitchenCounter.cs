@@ -6,7 +6,7 @@ public class KitchenCounter : BaseCounter
 {
     //[SerializeField] private KitchenIngredientSO kitchenIngredientSO;
 
-    public override void Interact(PlayerController player)
+    public override void Interact(BobaShopPlayerController player)
     {
         if (!HasKitchenIngredient())
         {

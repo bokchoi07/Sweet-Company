@@ -8,12 +8,12 @@ public class BaseCounter : MonoBehaviour, IKitchenIngredientParent
 
     private KitchenIngredient kitchenIngredient;
 
-    public virtual void Interact(PlayerController player)
+    public virtual void Interact(BobaShopPlayerController player)
     {
         Debug.LogError("BaseCounter.Interact();");
     }
 
-    public virtual void InteractAlt(PlayerController player)
+    public virtual void InteractAlt(BobaShopPlayerController player)
     {
         Debug.LogError("BaseCounter.InteractAlt();");
     }
