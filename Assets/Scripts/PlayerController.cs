@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour, IKitchenIngredientParent
     {
         if (Instance != null)
         {
-            Debug.LogError("there's more than 1 player instance");r
+            Debug.LogError("there's more than 1 player instance");
         }
         Instance = this;
     }
