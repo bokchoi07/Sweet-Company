@@ -2973,6 +2973,7 @@ GameObject:
   - component: {fileID: 2009152288}
   - component: {fileID: 2009152291}
   - component: {fileID: 2009152290}
+  - component: {fileID: 2009152292}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -3045,6 +3046,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009152287}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2009152292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009152287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ba40ffabfe99446877c32490aff0a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0.12
+  gameInput: {fileID: 745475302}
+  countersLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  kitchenIngredientHoldPoint: {fileID: 0}
 --- !u!1 &2019140790
 GameObject:
   m_ObjectHideFlags: 0
