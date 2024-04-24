@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179178094071fcf47a4416c08dda0bcb, type: 3}
+  m_Name: BoiledBoba-BurnedBoba
+  m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: de4b1f51910dc7d41b56db6ec0d0a43a, type: 2}
+  output: {fileID: 11400000, guid: cb49cf804405b6a46a55248d5fd60bf7, type: 2}
+  burnTimerMax: 5

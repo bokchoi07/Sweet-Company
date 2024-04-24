@@ -7,6 +7,7 @@ public class BobaShopPlayerController : MonoBehaviour, IKitchenIngredientParent
 {
     public static BobaShopPlayerController Instance { get; private set; }
 
+
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
@@ -35,6 +36,7 @@ public class BobaShopPlayerController : MonoBehaviour, IKitchenIngredientParent
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnInteractAltAction += GameInput_OnInteractAlternateAction;
     }
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
@@ -42,6 +44,13 @@ public class BobaShopPlayerController : MonoBehaviour, IKitchenIngredientParent
         if (selectedCounter != null)
         {
             selectedCounter.Interact(this);
+        }
+    }
+    private void GameInput_OnInteractAlternateAction(object sender, System.EventArgs e)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.InteractAlternate(this);
         }
     }
 

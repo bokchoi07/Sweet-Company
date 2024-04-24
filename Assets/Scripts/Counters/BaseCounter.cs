@@ -13,9 +13,9 @@ public class BaseCounter : MonoBehaviour, IKitchenIngredientParent
         Debug.LogError("BaseCounter.Interact();");
     }
 
-    public virtual void InteractAlt(BobaShopPlayerController player)
+    public virtual void InteractAlternate(BobaShopPlayerController player)
     {
-        Debug.LogError("BaseCounter.InteractAlt();");
+        // Debug.LogError("BaseCounter.InteractAlt();");
     }
 
     public Transform GetKitchenIngredientFollowTransform()

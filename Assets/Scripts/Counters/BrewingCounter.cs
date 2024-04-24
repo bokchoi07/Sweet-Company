@@ -1,0 +1,282 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BrewingCounter : BaseCounter, IHasProgress
+{
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
+
+    public class OnStateChangedEventArgs : EventArgs
+    {
+        public State state;
+    }
+    public enum State
+    {
+        Idle,
+        Brewing,
+        Brewed,
+    }
+
+    [SerializeField] private BrewingRecipeSO[] brewingRecipeSOArray;
+    
+    private State state;
+    private float brewingTimer;
+    private BrewingRecipeSO brewingRecipeSO;
+
+    private void Start()
+    {
+        state = State.Idle;
+    }
+
+    private void Update()
+    {
+        if (HasKitchenIngredient())
+        {
+            switch (state)
+            {
+                case State.Idle:
+                    break;
+                case State.Brewing:
+                    if (HasKitchenIngredient())
+                    {
+                        brewingTimer += Time.deltaTime;
+
+                        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                        {
+                            progressNormalized = brewingTimer / brewingRecipeSO.brewProgressMax
+                        });
+
+                        if (brewingTimer > brewingRecipeSO.brewProgressMax)
+                        {
+                            // Ingredient is boiled
+                            GetKitchenIngredient().DestroySelf();
+
+                            KitchenIngredient.SpawnKitchenIngredient(brewingRecipeSO.output, this);
+
+                            state = State.Brewed;
+                            brewingTimer = 0f;
+
+                            OnStateChanged?.Invoke(this, new OnStateChangedEventArgs
+                            {
+                                state = state
+                            });
+
+                            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                            {
+                                progressNormalized = 0f
+                            });
+                        }
+                    }
+                    break;
+                case State.Brewed:
+                    break;
+            }
+        }
+    }
+
+    public override void Interact(BobaShopPlayerController player)
+    {
+        if (!HasKitchenIngredient())
+        {
+            // there's no kitchen ingredient on the counter
+            if (player.HasKitchenIngredient()) //&& player.GetKitchenIngredient().CompareTag("TeaLeaves")
+            {
+                // player is holding something
+                // if ingredient has valid boiling recipe
+                if (HasRecipeWithInput(player.GetKitchenIngredient().GetKitchenIngredientSO()))
+                {
+                    // drop item onto counter
+                    player.GetKitchenIngredient().SetKitchenIngredientParent(this);
+
+                    brewingRecipeSO = GetBrewingRecipeSOWithInput(GetKitchenIngredient().GetKitchenIngredientSO());
+
+                    state = State.Brewing;
+                    brewingTimer = 0f;
+
+                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs
+                    {
+                        state = state
+                    });
+
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    {
+                        progressNormalized = brewingTimer / brewingRecipeSO.brewProgressMax
+                    });
+                }
+
+            }
+            else
+            {
+                // player is not holding anything
+            }
+        }
+        else
+        {
+            // there is a kitchen ingredient on the counter
+            if (player.HasKitchenIngredient())
+            {
+                // player is holding something
+            }
+            else
+            {
+                // player is not holding anything
+                // give kitchen ingredient to player to pick up
+                GetKitchenIngredient().SetKitchenIngredientParent(player);
+
+                state = State.Idle;
+
+                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs
+                {
+                    state = state
+                });
+
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                {
+                    progressNormalized = 0f
+                });
+            }
+        }
+    }
+
+    private KitchenIngredientSO GetOutputForInput(KitchenIngredientSO inputKitchenIngredientSO)
+    {
+        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenIngredientSO);
+        if (brewingRecipeSO != null)
+        {
+            return brewingRecipeSO.output;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private bool HasRecipeWithInput(KitchenIngredientSO inputKitchenIngredientSO)
+    {
+        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenIngredientSO);
+        return brewingRecipeSO != null;
+    }
+
+    private BrewingRecipeSO GetBrewingRecipeSOWithInput(KitchenIngredientSO inputKitchenIngredientSO)
+    {
+        foreach (BrewingRecipeSO brewingRecipeSO in brewingRecipeSOArray)
+        {
+            if (brewingRecipeSO.input == inputKitchenIngredientSO)
+            {
+                return brewingRecipeSO;
+            }
+        }
+
+        return null;
+    }
+}
+
+    /*
+    public override void Interact(BobaShopPlayerController player)
+    {
+        if (!HasKitchenIngredient())
+        {
+            // there's no kitchen ingredient on the counter
+            if (player.HasKitchenIngredient())
+            {
+                // player is holding something
+                // if ingredient has valid brewing recipe
+                if (HasRecipeWithInput(player.GetKitchenIngredient().GetKitchenIngredientSO()))
+                {
+                    // drop item onto counter
+                    player.GetKitchenIngredient().SetKitchenIngredientParent(this);
+                    brewingProgress = 0;
+
+                    BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(GetKitchenIngredient().GetKitchenIngredientSO());
+
+                    // fire progress event
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    {
+                        progressNormalized = (float) brewingProgress / brewingRecipeSO.brewProgressMax
+                    });
+                }
+                
+            }
+            else
+            {
+                // player is not holding anything
+            }
+        }
+        else
+        {
+            // there is a kitchen ingredient on the counter
+            if (player.HasKitchenIngredient())
+            {
+                // player is holding something
+            }
+            else
+            {
+                // player is not holding anything
+                // give kitchen ingredient to player to pick up
+                GetKitchenIngredient().SetKitchenIngredientParent(player);
+            }
+        }
+    }
+
+    public override void InteractAlternate(BobaShopPlayerController player)
+    {
+        // if there is KitchenIngredient here AND it can be brewed
+        if (HasKitchenIngredient() && HasRecipeWithInput(GetKitchenIngredient().GetKitchenIngredientSO()))
+        {
+            // there is ingredient on brewing counter
+            brewingProgress++;
+            BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(GetKitchenIngredient().GetKitchenIngredientSO());
+
+            // fire progress event
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+            {
+                progressNormalized = (float) brewingProgress / brewingRecipeSO.brewProgressMax
+            });
+
+            // if we reach the max brewing progress
+            if (brewingProgress >= brewingRecipeSO.brewProgressMax)
+            {
+                KitchenIngredientSO outputKitchenIngredientSO = GetOutputForInput(GetKitchenIngredient().GetKitchenIngredientSO());
+
+                GetKitchenIngredient().DestroySelf();
+
+                // spawn brewed version
+                KitchenIngredient.SpawnKitchenIngredient(outputKitchenIngredientSO, this);
+            }
+        }
+    }
+
+    private KitchenIngredientSO GetOutputForInput(KitchenIngredientSO inputKitchenIngredientSO)
+    {
+        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenIngredientSO);
+        if (brewingRecipeSO != null)
+        {
+            return brewingRecipeSO.output;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
+    private bool HasRecipeWithInput(KitchenIngredientSO inputKitchenIngredientSO)
+    {
+        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenIngredientSO);
+        return brewingRecipeSO != null;
+    }
+
+    private BrewingRecipeSO GetBrewingRecipeSOWithInput(KitchenIngredientSO inputKitchenIngredientSO)
+    {
+        foreach (BrewingRecipeSO brewingRecipeSO in brewingRecipeSOArray)
+        {
+            if (brewingRecipeSO.input == inputKitchenIngredientSO)
+            {
+                return brewingRecipeSO;
+            }
+        }
+
+        return null;
+    }
+}*/

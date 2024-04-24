@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c8ea5b87b359e8488d90b6645ed284b, type: 3}
-  m_Name: Boba
+  m_Script: {fileID: 11500000, guid: 57ff0003bcc5bd749b9c99f76246154f, type: 3}
+  m_Name: UncookedBoba-BoiledBoba
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7866533324934741727, guid: c6fe96e23853b154bbf387e7e8aeeb70, type: 3}
-  ingredientName: Boba
+  input: {fileID: 11400000, guid: 4a7b31f6a24ca014dad771e1c0975078, type: 2}
+  output: {fileID: 11400000, guid: de4b1f51910dc7d41b56db6ec0d0a43a, type: 2}
+  boilTimerMax: 4
