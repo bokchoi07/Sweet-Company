@@ -8,7 +8,8 @@ public class CupsCounter : BaseCounter
     public event EventHandler OnCupSpawned;
     public event EventHandler OnCupRemoved;
 
-    [SerializeField] private KitchenIngredientSO cupKitchenIngredientSO;
+    [SerializeField] private KitchenObjectSO cupKitchenObjectSO;
+
     private float spawnCupTimer;
     private float spawnCupTimerMax = 4f;
     private int cupsSpawnedAmount;
@@ -32,7 +33,7 @@ public class CupsCounter : BaseCounter
 
     public override void Interact(BobaShopPlayerController player)
     {
-        if (!player.HasKitchenIngredient())
+        if (!player.HasKitchenObject())
         {
             // Player is empty handed
             if (cupsSpawnedAmount > 0)
@@ -40,7 +41,7 @@ public class CupsCounter : BaseCounter
                 // There's at least one cup here
                 cupsSpawnedAmount--;
 
-                KitchenIngredient.SpawnKitchenIngredient(cupKitchenIngredientSO, player);
+                KitchenObject.SpawnKitchenObject(cupKitchenObjectSO, player);
                 OnCupRemoved?.Invoke(this, EventArgs.Empty);    
             }
         }

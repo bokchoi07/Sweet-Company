@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class BoilingRecipeSO : ScriptableObject
 {
-    public KitchenIngredientSO input;
-    public KitchenIngredientSO output;
+    public KitchenObjectSO input;
+    public KitchenObjectSO output;
     public float boilTimerMax;
 
 }

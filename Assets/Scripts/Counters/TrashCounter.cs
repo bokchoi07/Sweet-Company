@@ -6,9 +6,9 @@ public class TrashCounter : BaseCounter
 {
     public override void Interact(BobaShopPlayerController player)
     {
-        if (player.HasKitchenIngredient())
+        if (player.HasKitchenObject())
         {
-            player.GetKitchenIngredient().DestroySelf();
+            player.GetKitchenObject().DestroySelf();
         }
     }
 }

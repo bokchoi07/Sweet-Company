@@ -7,15 +7,15 @@ public class ContainerCounter : BaseCounter
 {
     public event EventHandler OnPlayerGrabbedObject;
 
-    [SerializeField] private KitchenIngredientSO kitchenIngredientSO;
+    [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
     public override void Interact(BobaShopPlayerController player)
     {
-        if (!player.HasKitchenIngredient())
+        if (!player.HasKitchenObject())
         {
             // player is not holding anything
-            // let player grab container counter's ingredient
-            KitchenIngredient.SpawnKitchenIngredient(kitchenIngredientSO, player);
+            // let player grab container counter's Object
+            KitchenObject.SpawnKitchenObject(kitchenObjectSO, player);
 
             OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
         }

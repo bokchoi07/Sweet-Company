@@ -36,14 +36,14 @@ public class BobaPotCounter : BaseCounter, IHasProgress
 
     private void Update()
     {
-        if (HasKitchenIngredient())
+        if (HasKitchenObject())
         {
             switch (state)
             {
                 case State.Idle:
                     break;
                 case State.Boiling:
-                    if (HasKitchenIngredient())
+                    if (HasKitchenObject())
                     {
                         boilingTimer += Time.deltaTime;
 
@@ -54,14 +54,14 @@ public class BobaPotCounter : BaseCounter, IHasProgress
                      
                         if (boilingTimer > boilingRecipeSO.boilTimerMax)
                         {
-                            // Ingredient is boiled
-                            GetKitchenIngredient().DestroySelf();
+                            // Object is boiled
+                            GetKitchenObject().DestroySelf();
 
-                            KitchenIngredient.SpawnKitchenIngredient(boilingRecipeSO.output, this);
+                            KitchenObject.SpawnKitchenObject(boilingRecipeSO.output, this);
 
                             state = State.Boiled;
                             burningTimer = 0f;
-                            burningRecipeSO = GetBurningRecipeSOWithInput(GetKitchenIngredient().GetKitchenIngredientSO());
+                            burningRecipeSO = GetBurningRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
                             OnStateChanged?.Invoke(this, new OnStateChangedEventArgs
                             {
@@ -80,9 +80,9 @@ public class BobaPotCounter : BaseCounter, IHasProgress
 
                     if (burningTimer > burningRecipeSO.burnTimerMax)
                     {
-                        GetKitchenIngredient().DestroySelf();
+                        GetKitchenObject().DestroySelf();
 
-                        KitchenIngredient.SpawnKitchenIngredient(burningRecipeSO.output, this);
+                        KitchenObject.SpawnKitchenObject(burningRecipeSO.output, this);
 
                         state = State.Burned;
 
@@ -105,19 +105,19 @@ public class BobaPotCounter : BaseCounter, IHasProgress
 
     public override void Interact(BobaShopPlayerController player)
     {
-        if (!HasKitchenIngredient())
+        if (!HasKitchenObject())
         {
-            // there's no kitchen ingredient on the counter
-            if (player.HasKitchenIngredient()) //&& player.GetKitchenIngredient().CompareTag("TeaLeaves")
+            // there's no kitchen Object on the counter
+            if (player.HasKitchenObject()) //&& player.GetKitchenObject().CompareTag("TeaLeaves")
             {
                 // player is holding something
-                // if ingredient has valid boiling recipe
-                if (HasRecipeWithInput(player.GetKitchenIngredient().GetKitchenIngredientSO()))
+                // if Object has valid boiling recipe
+                if (HasRecipeWithInput(player.GetKitchenObject().GetKitchenObjectSO()))
                 {
                     // drop item onto counter
-                    player.GetKitchenIngredient().SetKitchenIngredientParent(this);
+                    player.GetKitchenObject().SetKitchenObjectParent(this);
 
-                    boilingRecipeSO = GetBoilingRecipeSOWithInput(GetKitchenIngredient().GetKitchenIngredientSO());
+                    boilingRecipeSO = GetBoilingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
                     state = State.Boiling;
                     boilingTimer = 0f;
@@ -141,16 +141,36 @@ public class BobaPotCounter : BaseCounter, IHasProgress
         }
         else
         {
-            // there is a kitchen ingredient on the counter
-            if (player.HasKitchenIngredient())
+            // there is a kitchen Object on the counter
+            if (player.HasKitchenObject())
             {
-                // player is holding something
+                // player is holding a cup
+                if (player.GetKitchenObject().TryGetCup(out CupKitchenObject cupKitchenObject))
+                {
+                    // player is holding a cup
+                    if (cupKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))
+                    {
+                        GetKitchenObject().DestroySelf();
+
+                        state = State.Idle;
+
+                        OnStateChanged?.Invoke(this, new OnStateChangedEventArgs
+                        {
+                            state = state
+                        });
+
+                        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                        {
+                            progressNormalized = 0f
+                        });
+                    }
+                }
             }
             else
             {
                 // player is not holding anything
-                // give kitchen ingredient to player to pick up
-                GetKitchenIngredient().SetKitchenIngredientParent(player);
+                // give kitchen Object to player to pick up
+                GetKitchenObject().SetKitchenObjectParent(player);
 
                 state = State.Idle;
 
@@ -167,9 +187,9 @@ public class BobaPotCounter : BaseCounter, IHasProgress
         }
     }
 
-    private KitchenIngredientSO GetOutputForInput(KitchenIngredientSO inputKitchenIngredientSO)
+    private KitchenObjectSO GetOutputForInput(KitchenObjectSO inputKitchenObjectSO)
     {
-        BoilingRecipeSO boilingRecipeSO = GetBoilingRecipeSOWithInput(inputKitchenIngredientSO);
+        BoilingRecipeSO boilingRecipeSO = GetBoilingRecipeSOWithInput(inputKitchenObjectSO);
         if (boilingRecipeSO != null)
         {
             return boilingRecipeSO.output;
@@ -180,17 +200,17 @@ public class BobaPotCounter : BaseCounter, IHasProgress
         }
     }
 
-    private bool HasRecipeWithInput(KitchenIngredientSO inputKitchenIngredientSO)
+    private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
-        BoilingRecipeSO boilingRecipeSO = GetBoilingRecipeSOWithInput(inputKitchenIngredientSO);
+        BoilingRecipeSO boilingRecipeSO = GetBoilingRecipeSOWithInput(inputKitchenObjectSO);
         return boilingRecipeSO != null;
     }
 
-    private BoilingRecipeSO GetBoilingRecipeSOWithInput(KitchenIngredientSO inputKitchenIngredientSO)
+    private BoilingRecipeSO GetBoilingRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         foreach (BoilingRecipeSO boilingRecipeSO in boilingRecipeSOArray)
         {
-            if (boilingRecipeSO.input == inputKitchenIngredientSO)
+            if (boilingRecipeSO.input == inputKitchenObjectSO)
             {
                 return boilingRecipeSO;
             }
@@ -199,11 +219,11 @@ public class BobaPotCounter : BaseCounter, IHasProgress
         return null;
     }
 
-    private BurningRecipeSO GetBurningRecipeSOWithInput(KitchenIngredientSO inputKitchenIngredientSO)
+    private BurningRecipeSO GetBurningRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         foreach (BurningRecipeSO burningRecipeSO in burningRecipeSOArray)
         {
-            if (burningRecipeSO.input == inputKitchenIngredientSO)
+            if (burningRecipeSO.input == inputKitchenObjectSO)
             {
                 return burningRecipeSO;
             }

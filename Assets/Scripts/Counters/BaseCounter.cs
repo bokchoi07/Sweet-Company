@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCounter : MonoBehaviour, IKitchenIngredientParent
+public class BaseCounter : MonoBehaviour, IKitchenObjectParent
 {
     [SerializeField] private Transform counterTopPoint;
 
-    private KitchenIngredient kitchenIngredient;
+    private KitchenObject kitchenObject;
 
     public virtual void Interact(BobaShopPlayerController player)
     {
@@ -18,28 +18,28 @@ public class BaseCounter : MonoBehaviour, IKitchenIngredientParent
         // Debug.LogError("BaseCounter.InteractAlt();");
     }
 
-    public Transform GetKitchenIngredientFollowTransform()
+    public Transform GetKitchenObjectFollowTransform()
     {
         return counterTopPoint;
     }
 
-    public void SetKitchenIngredient(KitchenIngredient kitchenIngredient)
+    public void SetKitchenObject(KitchenObject kitchenObject)
     {
-        this.kitchenIngredient = kitchenIngredient;
+        this.kitchenObject = kitchenObject;
     }
 
-    public KitchenIngredient GetKitchenIngredient()
+    public KitchenObject GetKitchenObject()
     {
-        return kitchenIngredient;
+        return kitchenObject;
     }
 
-    public void ClearKitchenIngredient()
+    public void ClearKitchenObject()
     {
-        kitchenIngredient = null;
+        kitchenObject = null;
     }
 
-    public bool HasKitchenIngredient()
+    public bool HasKitchenObject()
     {
-        return kitchenIngredient != null;
+        return kitchenObject != null;
     }
 }

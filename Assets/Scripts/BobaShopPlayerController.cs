@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BobaShopPlayerController : MonoBehaviour, IKitchenIngredientParent
+public class BobaShopPlayerController : MonoBehaviour, IKitchenObjectParent
 {
     public static BobaShopPlayerController Instance { get; private set; }
 
@@ -17,12 +17,12 @@ public class BobaShopPlayerController : MonoBehaviour, IKitchenIngredientParent
     [SerializeField] private float moveSpeed = .12f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask countersLayerMask;
-    [SerializeField] private Transform kitchenIngredientHoldPoint;
+    [SerializeField] private Transform kitchenObjectHoldPoint;
 
     private bool isWalking;
     private Vector3 lastInteractDir;
     private BaseCounter selectedCounter;
-    private KitchenIngredient kitchenIngredient;
+    private KitchenObject kitchenObject;
 
     private void Awake()
     {
@@ -161,28 +161,28 @@ public class BobaShopPlayerController : MonoBehaviour, IKitchenIngredientParent
         });
     }
 
-    public Transform GetKitchenIngredientFollowTransform()
+    public Transform GetKitchenObjectFollowTransform()
     {
-        return kitchenIngredientHoldPoint;
+        return kitchenObjectHoldPoint;
     }
 
-    public void SetKitchenIngredient(KitchenIngredient kitchenIngredient)
+    public void SetKitchenObject(KitchenObject kitchenObject)
     {
-        this.kitchenIngredient = kitchenIngredient;
+        this.kitchenObject = kitchenObject;
     }
 
-    public KitchenIngredient GetKitchenIngredient()
+    public KitchenObject GetKitchenObject()
     {
-        return kitchenIngredient;
+        return kitchenObject;
     }
 
-    public void ClearKitchenIngredient()
+    public void ClearKitchenObject()
     {
-        kitchenIngredient = null;
+        kitchenObject = null;
     }
 
-    public bool HasKitchenIngredient()
+    public bool HasKitchenObject()
     {
-        return kitchenIngredient != null;
+        return kitchenObject != null;
     }
 }

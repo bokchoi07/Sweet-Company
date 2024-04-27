@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MatchaPowder
   m_EditorClassIdentifier: 
   prefab: {fileID: 7567019431801701149, guid: 16ba3ac0a961cdd41bbb2c4a5ecf4483, type: 3}
-  ingredientName: MatchaPowder
+  objectName: MatchaPowder

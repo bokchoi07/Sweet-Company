@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BoiledBoba
   m_EditorClassIdentifier: 
   prefab: {fileID: 7866533324934741727, guid: 31e515c4e6d27d64ab835b69710817c6, type: 3}
-  ingredientName: BoiledBoba
+  objectName: BoiledBoba

@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterTopPoint: {fileID: 848252681127641257}
-  cupKitchenIngredientSO: {fileID: 11400000, guid: 13cbf7ca26e323f448c295d076e24c58, type: 2}
+  cupKitchenObjectSO: {fileID: 11400000, guid: 13cbf7ca26e323f448c295d076e24c58, type: 2}
 --- !u!1001 &3515239427237276441
 PrefabInstance:
   m_ObjectHideFlags: 0

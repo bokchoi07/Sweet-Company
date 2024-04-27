@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class KitchenCounter : BaseCounter
 {
-    //[SerializeField] private KitchenIngredientSO kitchenIngredientSO;
+    //[SerializeField] private KitchenObjectSO kitchenObjectSO;
 
     public override void Interact(BobaShopPlayerController player)
     {
-        if (!HasKitchenIngredient())
+        if (!HasKitchenObject())
         {
-            // there's no kitchen ingredient on the counter
-            if (player.HasKitchenIngredient())
+            // there's no kitchen Object on the counter
+            if (player.HasKitchenObject())
             {
                 // player is holding something
                 // so drop item onto counter
-                player.GetKitchenIngredient().SetKitchenIngredientParent(this);
+                player.GetKitchenObject().SetKitchenObjectParent(this);
             }
             else
             {
@@ -24,16 +24,35 @@ public class KitchenCounter : BaseCounter
         }
         else
         {
-            // there is a kitchen ingredient on the counter
-            if (player.HasKitchenIngredient())
+            // there is a kitchen Object on the counter
+            if (player.HasKitchenObject())
             {
                 // player is holding something
+                if (player.GetKitchenObject().TryGetCup(out CupKitchenObject cupKitchenObject))
+                {
+                    // player is holding a cup
+                    if (cupKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO())) 
+                    { 
+                        GetKitchenObject().DestroySelf();
+                    }
+                }
+                else
+                {
+                    // player is not holding cup but something else
+                    if (GetKitchenObject().TryGetCup(out cupKitchenObject))
+                    {
+                        // counter is holding a cup
+                        if (cupKitchenObject.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO())) {
+                            player.GetKitchenObject().DestroySelf();
+                        }
+                    }
+                }
             }
             else
             {
                 // player is not holding anything
-                // give kitchen ingredient to player to pick up
-                GetKitchenIngredient().SetKitchenIngredientParent(player);
+                // give kitchen Object to player to pick up
+                GetKitchenObject().SetKitchenObjectParent(player);
             }
         }
     }

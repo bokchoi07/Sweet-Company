@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Cup
   m_EditorClassIdentifier: 
   prefab: {fileID: 7567019431801701149, guid: 605043644652d1140970ae2152f1d82f, type: 3}
-  ingredientName: Cup
+  objectName: Cup

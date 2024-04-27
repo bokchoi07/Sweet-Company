@@ -32,14 +32,14 @@ public class BrewingCounter : BaseCounter, IHasProgress
 
     private void Update()
     {
-        if (HasKitchenIngredient())
+        if (HasKitchenObject())
         {
             switch (state)
             {
                 case State.Idle:
                     break;
                 case State.Brewing:
-                    if (HasKitchenIngredient())
+                    if (HasKitchenObject())
                     {
                         brewingTimer += Time.deltaTime;
 
@@ -50,10 +50,10 @@ public class BrewingCounter : BaseCounter, IHasProgress
 
                         if (brewingTimer > brewingRecipeSO.brewProgressMax)
                         {
-                            // Ingredient is boiled
-                            GetKitchenIngredient().DestroySelf();
+                            // Object is boiled
+                            GetKitchenObject().DestroySelf();
 
-                            KitchenIngredient.SpawnKitchenIngredient(brewingRecipeSO.output, this);
+                            KitchenObject.SpawnKitchenObject(brewingRecipeSO.output, this);
 
                             state = State.Brewed;
                             brewingTimer = 0f;
@@ -78,19 +78,19 @@ public class BrewingCounter : BaseCounter, IHasProgress
 
     public override void Interact(BobaShopPlayerController player)
     {
-        if (!HasKitchenIngredient())
+        if (!HasKitchenObject())
         {
-            // there's no kitchen ingredient on the counter
-            if (player.HasKitchenIngredient()) //&& player.GetKitchenIngredient().CompareTag("TeaLeaves")
+            // there's no kitchen Object on the counter
+            if (player.HasKitchenObject()) //&& player.GetKitchenObject().CompareTag("TeaLeaves")
             {
                 // player is holding something
-                // if ingredient has valid boiling recipe
-                if (HasRecipeWithInput(player.GetKitchenIngredient().GetKitchenIngredientSO()))
+                // if Object has valid boiling recipe
+                if (HasRecipeWithInput(player.GetKitchenObject().GetKitchenObjectSO()))
                 {
                     // drop item onto counter
-                    player.GetKitchenIngredient().SetKitchenIngredientParent(this);
+                    player.GetKitchenObject().SetKitchenObjectParent(this);
 
-                    brewingRecipeSO = GetBrewingRecipeSOWithInput(GetKitchenIngredient().GetKitchenIngredientSO());
+                    brewingRecipeSO = GetBrewingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
                     state = State.Brewing;
                     brewingTimer = 0f;
@@ -114,16 +114,24 @@ public class BrewingCounter : BaseCounter, IHasProgress
         }
         else
         {
-            // there is a kitchen ingredient on the counter
-            if (player.HasKitchenIngredient())
+            // there is a kitchen Object on the counter
+            if (player.HasKitchenObject())
             {
                 // player is holding something
+                if (player.GetKitchenObject().TryGetCup(out CupKitchenObject cupKitchenObject))
+                {
+                    // player is holding a cup
+                    if (cupKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))
+                    {
+                        GetKitchenObject().DestroySelf();
+                    }
+                }
             }
             else
             {
                 // player is not holding anything
-                // give kitchen ingredient to player to pick up
-                GetKitchenIngredient().SetKitchenIngredientParent(player);
+                // give kitchen Object to player to pick up
+                GetKitchenObject().SetKitchenObjectParent(player);
 
                 state = State.Idle;
 
@@ -140,9 +148,9 @@ public class BrewingCounter : BaseCounter, IHasProgress
         }
     }
 
-    private KitchenIngredientSO GetOutputForInput(KitchenIngredientSO inputKitchenIngredientSO)
+    private KitchenObjectSO GetOutputForInput(KitchenObjectSO inputKitchenObjectSO)
     {
-        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenIngredientSO);
+        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenObjectSO);
         if (brewingRecipeSO != null)
         {
             return brewingRecipeSO.output;
@@ -153,17 +161,17 @@ public class BrewingCounter : BaseCounter, IHasProgress
         }
     }
 
-    private bool HasRecipeWithInput(KitchenIngredientSO inputKitchenIngredientSO)
+    private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
-        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenIngredientSO);
+        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenObjectSO);
         return brewingRecipeSO != null;
     }
 
-    private BrewingRecipeSO GetBrewingRecipeSOWithInput(KitchenIngredientSO inputKitchenIngredientSO)
+    private BrewingRecipeSO GetBrewingRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         foreach (BrewingRecipeSO brewingRecipeSO in brewingRecipeSOArray)
         {
-            if (brewingRecipeSO.input == inputKitchenIngredientSO)
+            if (brewingRecipeSO.input == inputKitchenObjectSO)
             {
                 return brewingRecipeSO;
             }
@@ -176,20 +184,20 @@ public class BrewingCounter : BaseCounter, IHasProgress
     /*
     public override void Interact(BobaShopPlayerController player)
     {
-        if (!HasKitchenIngredient())
+        if (!HasKitchenObject())
         {
-            // there's no kitchen ingredient on the counter
-            if (player.HasKitchenIngredient())
+            // there's no kitchen Object on the counter
+            if (player.HasKitchenObject())
             {
                 // player is holding something
-                // if ingredient has valid brewing recipe
-                if (HasRecipeWithInput(player.GetKitchenIngredient().GetKitchenIngredientSO()))
+                // if Object has valid brewing recipe
+                if (HasRecipeWithInput(player.GetKitchenObject().GetKitchenObjectSO()))
                 {
                     // drop item onto counter
-                    player.GetKitchenIngredient().SetKitchenIngredientParent(this);
+                    player.GetKitchenObject().SetKitchenObjectParent(this);
                     brewingProgress = 0;
 
-                    BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(GetKitchenIngredient().GetKitchenIngredientSO());
+                    BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
                     // fire progress event
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
@@ -206,28 +214,28 @@ public class BrewingCounter : BaseCounter, IHasProgress
         }
         else
         {
-            // there is a kitchen ingredient on the counter
-            if (player.HasKitchenIngredient())
+            // there is a kitchen Object on the counter
+            if (player.HasKitchenObject())
             {
                 // player is holding something
             }
             else
             {
                 // player is not holding anything
-                // give kitchen ingredient to player to pick up
-                GetKitchenIngredient().SetKitchenIngredientParent(player);
+                // give kitchen Object to player to pick up
+                GetKitchenObject().SetKitchenObjectParent(player);
             }
         }
     }
 
     public override void InteractAlternate(BobaShopPlayerController player)
     {
-        // if there is KitchenIngredient here AND it can be brewed
-        if (HasKitchenIngredient() && HasRecipeWithInput(GetKitchenIngredient().GetKitchenIngredientSO()))
+        // if there is KitchenObject here AND it can be brewed
+        if (HasKitchenObject() && HasRecipeWithInput(GetKitchenObject().GetKitchenObjectSO()))
         {
-            // there is ingredient on brewing counter
+            // there is Object on brewing counter
             brewingProgress++;
-            BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(GetKitchenIngredient().GetKitchenIngredientSO());
+            BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
             // fire progress event
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
@@ -238,19 +246,19 @@ public class BrewingCounter : BaseCounter, IHasProgress
             // if we reach the max brewing progress
             if (brewingProgress >= brewingRecipeSO.brewProgressMax)
             {
-                KitchenIngredientSO outputKitchenIngredientSO = GetOutputForInput(GetKitchenIngredient().GetKitchenIngredientSO());
+                KitchenObjectSO outputKitchenObjectSO = GetOutputForInput(GetKitchenObject().GetKitchenObjectSO());
 
-                GetKitchenIngredient().DestroySelf();
+                GetKitchenObject().DestroySelf();
 
                 // spawn brewed version
-                KitchenIngredient.SpawnKitchenIngredient(outputKitchenIngredientSO, this);
+                KitchenObject.SpawnKitchenObject(outputKitchenObjectSO, this);
             }
         }
     }
 
-    private KitchenIngredientSO GetOutputForInput(KitchenIngredientSO inputKitchenIngredientSO)
+    private KitchenObjectSO GetOutputForInput(KitchenObjectSO inputKitchenObjectSO)
     {
-        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenIngredientSO);
+        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenObjectSO);
         if (brewingRecipeSO != null)
         {
             return brewingRecipeSO.output;
@@ -261,17 +269,17 @@ public class BrewingCounter : BaseCounter, IHasProgress
         }
     }
     
-    private bool HasRecipeWithInput(KitchenIngredientSO inputKitchenIngredientSO)
+    private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
-        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenIngredientSO);
+        BrewingRecipeSO brewingRecipeSO = GetBrewingRecipeSOWithInput(inputKitchenObjectSO);
         return brewingRecipeSO != null;
     }
 
-    private BrewingRecipeSO GetBrewingRecipeSOWithInput(KitchenIngredientSO inputKitchenIngredientSO)
+    private BrewingRecipeSO GetBrewingRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         foreach (BrewingRecipeSO brewingRecipeSO in brewingRecipeSOArray)
         {
-            if (brewingRecipeSO.input == inputKitchenIngredientSO)
+            if (brewingRecipeSO.input == inputKitchenObjectSO)
             {
                 return brewingRecipeSO;
             }
