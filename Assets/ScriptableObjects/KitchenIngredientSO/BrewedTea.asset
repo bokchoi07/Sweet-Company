@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BrewedTea
   m_EditorClassIdentifier: 
   prefab: {fileID: 7567019431801701149, guid: cbf87dcf3c47e7f4ca35c80675b1abf0, type: 3}
-  ingredientName: BrewedTea
+  objectName: BrewedTea

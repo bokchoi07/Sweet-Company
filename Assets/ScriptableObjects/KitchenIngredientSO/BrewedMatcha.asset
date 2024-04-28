@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BrewedMatcha
   m_EditorClassIdentifier: 
   prefab: {fileID: 7567019431801701149, guid: 3862474bddd1ee342aa38be9c0bd3922, type: 3}
-  ingredientName: BrewedMatcha
+  objectName: BrewedMatcha
