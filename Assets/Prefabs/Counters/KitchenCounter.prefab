@@ -198,6 +198,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6817871915708938425, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
+      propertyPath: m_Center.x
+      value: -0.050893545
+      objectReference: {fileID: 0}
+    - target: {fileID: 6817871915708938425, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
+      propertyPath: m_Center.y
+      value: 0.66623163
+      objectReference: {fileID: 0}
     - target: {fileID: 7356750164411537488, guid: 7b2eaa58a21e5114f9a072ffab8d19f1, type: 3}
       propertyPath: m_Name
       value: KitchenCounter

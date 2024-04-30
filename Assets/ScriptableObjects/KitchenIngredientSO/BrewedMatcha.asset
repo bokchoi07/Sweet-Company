@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: BrewedMatcha
   m_EditorClassIdentifier: 
   prefab: {fileID: 7567019431801701149, guid: 3862474bddd1ee342aa38be9c0bd3922, type: 3}
-  objectName: BrewedMatcha
+  sprite: {fileID: 21300000, guid: 06e6bc5df56f3344795947fb7e5e927a, type: 3}
+  objectName: Brewed Matcha

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: IceCubes
   m_EditorClassIdentifier: 
   prefab: {fileID: 7567019431801701149, guid: e12cc47a8d304aa45b9fe089490942b9, type: 3}
+  sprite: {fileID: 21300000, guid: d66d0053e4289a9499d4829f2fb41758, type: 3}
   objectName: IceCubes
