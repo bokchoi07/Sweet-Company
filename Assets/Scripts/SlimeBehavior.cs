@@ -24,8 +24,6 @@ public class SlimeBehavior : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         // Start patrolling immediately
         Patroling();
-        // Calculate base offset
-        CalculateBaseOffset();
     }
 
     // Update is called once per frame
@@ -35,7 +33,7 @@ public class SlimeBehavior : MonoBehaviour
         if (Vector3.Distance(transform.position, player.position) <= attackRange)
         {
             // Stop patrolling and chase the player
-            agent.SetDestination(player.position);
+            AttackPlayer();
         }
         else
         {
@@ -90,17 +88,11 @@ public class SlimeBehavior : MonoBehaviour
 
     private void AttackPlayer()
     {
-        if (!isWithinAttackRange())
-        {
             // Only set destination if not already within attack range
             agent.SetDestination(player.position);
-        }
-        else
-        {
+
             // Optionally, you could add logic here to stop the enemy when within attack range
-            agent.ResetPath(); // Stop moving
-                               // Add code for attacking the player
-        }
+            RotateToPlayer(); // Stop moving
     }
     private void OnDrawGizmosSelected()
     {
@@ -117,16 +109,13 @@ public class SlimeBehavior : MonoBehaviour
         }
     }
 
-    private void CalculateBaseOffset()
+    private void RotateToPlayer()
     {
-        // Adjust the base offset by the desired difference
-        float adjustedOffset = 0.08f;
+        transform.LookAt(player);
 
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, whatIsGround))
-        {
-            float distanceToGround = transform.position.y - hit.point.y - adjustedOffset;
-            agent.baseOffset = distanceToGround;
-        }
+        Vector3 direction = player.position - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+        transform.rotation = rotation;
     }
 }
 

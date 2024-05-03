@@ -44,6 +44,7 @@ public class MilkBehavior : MonoBehaviour
         {
             // Stop patrolling and chase the player
             agent.SetDestination(player.position);
+            RotateToPlayer();
         }
         else
         {
@@ -53,12 +54,13 @@ public class MilkBehavior : MonoBehaviour
                 Patroling();
             }
         }
-        // Check if the player is within scare range
-        if (Vector3.Distance(transform.position, player.position) <= scareRange)
+
+        // Check if the player is within scare range and the object is not already transformed
+        if (!isTransformed && Vector3.Distance(transform.position, player.position) <= scareRange)
         {
             Scare();
         }
-        else if (originalObject != gameObject)
+        else if (isTransformed && originalObject != gameObject)
         {
             Revert();
         }
@@ -93,9 +95,10 @@ public class MilkBehavior : MonoBehaviour
     }
     private void Scare()
     {
-        if (!isTransformed)
+        // Instantiate the transformed object prefab if it doesn't exist
+        if (transformedInstance == null)
         {
-            // Instantiate the transformed object prefab
+            // Create a transformed instance at the current position of the object
             transformedInstance = Instantiate(transformedObjectPrefab, transform.position, transform.rotation);
 
             // Set the speed of the transformed object
@@ -104,18 +107,18 @@ public class MilkBehavior : MonoBehaviour
             // Deactivate the original object
             gameObject.SetActive(false);
 
+            // Update the transformation flag
             isTransformed = true;
         }
     }
 
     private void Revert()
     {
-        if (isTransformed && transformedInstance != null)
+        if (transformedInstance != null)
         {
             // Destroy the transformed object and reactivate the original one
             Destroy(transformedInstance);
             gameObject.SetActive(true);
-
             isTransformed = false;
         }
     }
@@ -159,5 +162,13 @@ public class MilkBehavior : MonoBehaviour
             // Deal damage to the player when colliding
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damageAmount);
         }
+    }
+    private void RotateToPlayer()
+    {
+        transform.LookAt(player);
+
+        Vector3 direction = player.position - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+        transform.rotation = rotation;
     }
 }
