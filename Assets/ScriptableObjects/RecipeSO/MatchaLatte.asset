@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81689846a9978884c90bda3d0288d3a7, type: 3}
+  m_Name: MatchaLatte
+  m_EditorClassIdentifier: 
+  kitchenObjectSOList:
+  - {fileID: 11400000, guid: 644b4034befc1c244a3db6d291fc030c, type: 2}
+  - {fileID: 11400000, guid: 2336da175115d1c4db72bc81f01213da, type: 2}
+  - {fileID: 11400000, guid: c418919bf0cf4d5459305c4a80303b5c, type: 2}
+  recipeName: Matcha Latte
