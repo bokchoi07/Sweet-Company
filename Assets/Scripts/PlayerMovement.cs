@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce;
     public float jumpCooldown;
+    public float maxJumpCooldown;
     public float airMultiplier;
     bool readyToJump;
 
@@ -39,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
+
+        jumpCooldown = maxJumpCooldown;
     }
 
     // Update is called once per frame
@@ -46,7 +50,9 @@ public class PlayerMovement : MonoBehaviour
     {
         // ground check
         grounded = Physics.Raycast(transform.position + new Vector3(0, 0.05f, 0), Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
-
+        
+        jumpCooldown += Time.deltaTime;
+        
         MyInput();
         SpeedControl();
 
@@ -71,12 +77,12 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && jumpCooldown >= maxJumpCooldown) // && jumpCooldown >= maxJumpCooldown
         {
             readyToJump = false;
 
             Jump();
-
+            jumpCooldown = 0;
             Invoke(nameof(ResetJump), jumpCooldown);
         }
     }

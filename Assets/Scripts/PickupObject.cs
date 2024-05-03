@@ -8,7 +8,7 @@ public class PickupObject : MonoBehaviour
     public GameObject promptUI; // UI element to display the pickup prompt
 
     private bool isInRange = false;
-    private GameObject player;
+    public GameObject player;
     private bool isPickedUp = false;
 
     private void Start()
