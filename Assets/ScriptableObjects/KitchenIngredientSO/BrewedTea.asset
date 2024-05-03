@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: BrewedTea
   m_EditorClassIdentifier: 
   prefab: {fileID: 7567019431801701149, guid: cbf87dcf3c47e7f4ca35c80675b1abf0, type: 3}
-  objectName: BrewedTea
+  sprite: {fileID: 21300000, guid: 022a6f7755d12e641b508c4eb9184d3d, type: 3}
+  objectName: Brewed Tea

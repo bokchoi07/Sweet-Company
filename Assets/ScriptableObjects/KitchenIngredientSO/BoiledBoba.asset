@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: BoiledBoba
   m_EditorClassIdentifier: 
   prefab: {fileID: 7866533324934741727, guid: 31e515c4e6d27d64ab835b69710817c6, type: 3}
-  objectName: BoiledBoba
+  sprite: {fileID: 21300000, guid: d220b65500f67b24b89ac84ed0515902, type: 3}
+  objectName: Boiled Boba

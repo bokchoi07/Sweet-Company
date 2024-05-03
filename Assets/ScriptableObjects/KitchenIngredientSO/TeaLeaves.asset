@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: TeaLeaves
   m_EditorClassIdentifier: 
   prefab: {fileID: 7567019431801701149, guid: 8607726175980eb469869ea250ebead5, type: 3}
-  objectName: TeaLeaves
+  sprite: {fileID: 0}
+  objectName: Tea Leaves

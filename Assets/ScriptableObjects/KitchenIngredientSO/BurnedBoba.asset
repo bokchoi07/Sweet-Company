@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: BurnedBoba
   m_EditorClassIdentifier: 
   prefab: {fileID: 7866533324934741727, guid: 8d73256ffbd6a5b42bdb2733cace2630, type: 3}
-  objectName: BurnedBoba
+  sprite: {fileID: 0}
+  objectName: Burned Boba

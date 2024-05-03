@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Milk
   m_EditorClassIdentifier: 
   prefab: {fileID: 7567019431801701149, guid: 8396ea629bb445047908722f1e7d4ee3, type: 3}
+  sprite: {fileID: 21300000, guid: 147fd9125c70020498534c683ce0ab7d, type: 3}
   objectName: Milk
