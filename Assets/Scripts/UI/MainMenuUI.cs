@@ -32,6 +32,8 @@ public class MainMenuUI : MonoBehaviour
         {
             HideHowToPlayPage();
         });
+
+        Time.timeScale = 1f; // resetting time
     }
 
     private void ShowHowToPlayPage()
