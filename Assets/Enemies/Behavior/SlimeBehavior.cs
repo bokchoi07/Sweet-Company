@@ -18,10 +18,19 @@ public class SlimeBehavior : MonoBehaviour
     //Attacking
     public float attackRange;
 
+    //Audio
+    public AudioClip slimeSound; // AudioClip for the slime sound
+    public float audioRange; // Distance threshold to play the audio
+    private AudioSource audioSource; // Reference to the AudioSource component
+
     void Start()
     {
         player = GameObject.Find("PlayerObj").transform;
         agent = GetComponent<NavMeshAgent>();
+
+        // Get the AudioSource component
+        audioSource = GetComponent<AudioSource>();
+
         // Start patrolling immediately
         Patroling();
     }
@@ -41,6 +50,15 @@ public class SlimeBehavior : MonoBehaviour
             if (!agent.hasPath || agent.remainingDistance < 0.5f)
             {
                 Patroling();
+            }
+        }
+        // Check if the player is within audio range
+        if (Vector3.Distance(transform.position, player.position) <= audioRange)
+        {
+            // Play the slime sound if not already playing
+            if (!audioSource.isPlaying && slimeSound != null)
+            {
+                audioSource.PlayOneShot(slimeSound);
             }
         }
     }

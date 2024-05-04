@@ -96,7 +96,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3350143996355712013}
   - component: {fileID: 4364903541166101990}
-  - component: {fileID: 2899759168287685352}
   - component: {fileID: 693812551503205433}
   - component: {fileID: 4677945547188591937}
   m_Layer: 0
@@ -138,33 +137,6 @@ MonoBehaviour:
   attackRange: 8
   MilkMonsterPrefab: {fileID: 706756731565874894, guid: 3b9fa9e3f2430504b92e865bd20927bd, type: 3}
   damageAmount: 10
---- !u!54 &2899759168287685352
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2681271922846650039}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!64 &693812551503205433
 MeshCollider:
   m_ObjectHideFlags: 0
