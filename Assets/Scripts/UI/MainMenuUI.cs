@@ -9,6 +9,10 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private Button howToPlayButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button backButton;
+
+    [SerializeField] private GameObject howToPlayPage;
+
 
     private void Awake()
     {
@@ -18,17 +22,25 @@ public class MainMenuUI : MonoBehaviour
         });
         howToPlayButton.onClick.AddListener(() =>
         {
-            ShowInstructions();
+            ShowHowToPlayPage();
         });
         quitButton.onClick.AddListener(() => 
         {
             Application.Quit();
         });
-
+        backButton.onClick.AddListener(() =>
+        {
+            HideHowToPlayPage();
+        });
     }
 
-    private void ShowInstructions()
+    private void ShowHowToPlayPage()
     {
+        howToPlayPage.SetActive(true);
+    }
 
+    private void HideHowToPlayPage()
+    {
+        howToPlayPage.SetActive(false);
     }
 }
