@@ -50,7 +50,7 @@ public class BrewingCounter : BaseCounter, IHasProgress
 
                         if (brewingTimer > brewingRecipeSO.brewProgressMax)
                         {
-                            // Object is boiled
+                            // Object is brewed
                             GetKitchenObject().DestroySelf();
 
                             KitchenObject.SpawnKitchenObject(brewingRecipeSO.output, this);

@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/MainMenu.unity
+    guid: 9ceae6e2693ef9941b9cbc052bd1cfe8
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: fc1ae771a47f0c141901e2ad8d2fea8b
+  - enabled: 1
+    path: Assets/Scenes/BobaShop.unity
+    guid: 331dceda069840345bad8ed5a0d68cba
   - enabled: 1
     path: Assets/Scenes/Office.unity
     guid: 6c6f0fb3f23876b47a1cee8bd03456f1
+  - enabled: 1
+    path: Assets/Scenes/MainMap.unity
+    guid: 8cba5202221b7f54185942809f781092
   m_configObjects: {}

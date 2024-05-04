@@ -7,6 +7,8 @@ public class DeliveryManager : MonoBehaviour
 {
     public event EventHandler OnRecipeSpawned;
     public event EventHandler OnRecipeCompleted;
+    public event EventHandler OnRecipeSuccess;
+    public event EventHandler OnRecipeFailed;  
 
     public static DeliveryManager Instance { get; private set; }
 
@@ -16,6 +18,8 @@ public class DeliveryManager : MonoBehaviour
     private float spawnRecipeTimer;
     private float spawnRecipeTimerMax = 4f;
     private int waitingRecipeMax = 4;
+    private int completedOrdersAmount;
+    private int wrongOrdersAmount;
 
     private void Awake()
     {
@@ -74,19 +78,35 @@ public class DeliveryManager : MonoBehaviour
                 if (cupContentsMatchesRecipe) 
                 {
                     // player delivered correct recipe
+                    completedOrdersAmount++;
+
                     waitingRecipeSOList.RemoveAt(i);
 
                     OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+                    OnRecipeSuccess?.Invoke(this, EventArgs.Empty); // playing sfx for correct recipe made
                     return;
                 }
             }
         }
 
         // no matches found; did not deliver correct recipe
+        wrongOrdersAmount++;
+
+        OnRecipeFailed?.Invoke(this, EventArgs.Empty); // playing sfx for wrong recipe made
     }
 
     public List<RecipeSO> GetWaitingRecipeSOList()
     {
         return waitingRecipeSOList;
+    }
+
+    public int GetCompletedOrdersAmount()
+    {
+        return completedOrdersAmount;
+    }
+
+    public int GetWrongOrdersAmount()
+    {
+        return wrongOrdersAmount;
     }
 }
