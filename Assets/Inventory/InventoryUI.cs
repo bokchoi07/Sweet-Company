@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/* This object manages the inventory UI. */
-
 public class InventoryUI : MonoBehaviour
 {
     // Static reference to the InventoryUI instance
@@ -21,10 +19,12 @@ public class InventoryUI : MonoBehaviour
         // Ensure that there's only one instance of InventoryUI
         if (instance != null)
         {
-            Debug.LogWarning("More than one instance of InventoryUI found!");
+            // Destroy this instance if another instance already exists
+            Destroy(gameObject);
             return;
         }
         instance = this;
+        DontDestroyOnLoad(gameObject); // Persist across scene changes
     }
 
     void Start()
@@ -33,6 +33,9 @@ public class InventoryUI : MonoBehaviour
         inventory.onItemChangedCallback += UpdateUI;
 
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+
+        // Update UI on start
+        UpdateUI();
     }
 
     // Check to see if we should open/close the inventory
@@ -46,8 +49,8 @@ public class InventoryUI : MonoBehaviour
     }
 
     // Update the inventory UI by:
-    //		- Adding items
-    //		- Clearing empty slots
+    //      - Adding items
+    //      - Clearing empty slots
     // This is called using a delegate on the Inventory.
     public void UpdateUI()
     {
@@ -65,5 +68,5 @@ public class InventoryUI : MonoBehaviour
                 }
             }
         }
-	}
+    }
 }

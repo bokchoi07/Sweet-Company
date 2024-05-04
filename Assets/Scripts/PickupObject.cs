@@ -19,6 +19,8 @@ public class PickupObject : MonoBehaviour
 
     private void Update()
     {
+        if (isInRange)
+            Debug.Log("in range");
         if (isInRange && !isPickedUp && Input.GetKeyDown(pickupKey))
         {
             // Perform pickup action

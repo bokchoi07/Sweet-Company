@@ -101,6 +101,7 @@ MonoBehaviour:
   pickupKey: 101
   itemIcon: {fileID: 21300000, guid: ad14f06b2fa49874cbff63159b2c0e4b, type: 3}
   promptUI: {fileID: 8919567486796209541, guid: ec4dae6a0b1d0574c9b19ec126ef8048, type: 3}
+  player: {fileID: 1581063268194662022, guid: 6dc96d75301e41040809d63148d44ee7, type: 3}
 --- !u!65 &-8729702457536219527
 BoxCollider:
   m_ObjectHideFlags: 0

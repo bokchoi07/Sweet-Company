@@ -61,6 +61,14 @@ public class Inventory : MonoBehaviour
     {
         InventoryUI.instance.UpdateUI();
     }
+    // Clear the inventory
+    public void ClearInventory()
+    {
+        items.Clear();
+
+        // Trigger the onItemChangedCallback if it's not null
+        onItemChangedCallback?.Invoke();
+    }
 
     // Method to populate empty slots with X sprites beyond the current maximum
     public void PopulateEmptySlots()

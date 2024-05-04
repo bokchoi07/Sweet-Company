@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -30,9 +31,16 @@ public class PlayerHealth : MonoBehaviour
     // Method to handle player's death
     private void Die()
     {
-        // You can add any death-related logic here, such as game over, respawn, etc.
+        // Reset inventory (assuming you have a reference to the inventory component)
+        Inventory.instance.ClearInventory();
+
+        // Move to the "Office" scene
+        SceneManager.LoadScene("Office");
+
+        // You can add any additional death-related logic here
         Debug.Log("Player has died!");
     }
+
 }
 
 
