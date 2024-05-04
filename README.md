@@ -5,3 +5,6 @@ readme wip
 Boba Shop bgm: Jazz Comedy  
 Music by: Bensound  
 License code: SK3BLILFBWVQPI1R  
+
+Font - Light Stories by Khurasan  
+https://www.creativefabrica.com/designer/khurasan/ref/53/
