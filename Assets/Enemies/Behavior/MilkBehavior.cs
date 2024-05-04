@@ -27,11 +27,20 @@ public class MilkBehavior : MonoBehaviour
     private bool isTransformed = false;
     private GameObject transformedInstance;
 
+    //Audio
+    public AudioClip milkSound;
+    private AudioSource audioSource;
+    public float audioRange; // Distance threshold to play the audio
+
     void Start()
     {
         player = GameObject.Find("PlayerObj").transform;
         agent = GetComponent<NavMeshAgent>();
         originalObject = gameObject;
+
+        // Get the AudioSource component
+        audioSource = GetComponent<AudioSource>();
+
         // Start patrolling immediately
         Patroling();
     }
@@ -52,6 +61,15 @@ public class MilkBehavior : MonoBehaviour
             if (!agent.hasPath || agent.remainingDistance < 0.5f)
             {
                 Patroling();
+            }
+        }
+        // Check if the player is within audio range
+        if (Vector3.Distance(transform.position, player.position) <= audioRange)
+        {
+            // Play the slime sound if not already playing
+            if (!audioSource.isPlaying && milkSound != null)
+            {
+                audioSource.PlayOneShot(milkSound);
             }
         }
 

@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce;
     public float jumpCooldown;
-    public float maxJumpCooldown;
+    //public float maxJumpCooldown;
     public float airMultiplier;
     bool readyToJump;
 
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
         readyToJump = true;
 
-        jumpCooldown = maxJumpCooldown;
+        //jumpCooldown = maxJumpCooldown;
     }
 
     // Update is called once per frame
@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && jumpCooldown >= maxJumpCooldown) // && jumpCooldown >= maxJumpCooldown
+        if (Input.GetKey(jumpKey) && readyToJump && grounded) // && jumpCooldown >= maxJumpCooldown
         {
             readyToJump = false;
 
