@@ -5,18 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         // display msg "ready to sell? smth like that

@@ -7,7 +7,7 @@ public class BobaShopPlayerController : MonoBehaviour, IKitchenObjectParent
 {
     public static BobaShopPlayerController Instance { get; private set; }
 
-
+    public event EventHandler OnPickup;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
@@ -31,6 +31,7 @@ public class BobaShopPlayerController : MonoBehaviour, IKitchenObjectParent
             Debug.LogError("there's more than 1 player instance");
         }
         Instance = this;
+
     }
 
     private void Start()
@@ -41,6 +42,8 @@ public class BobaShopPlayerController : MonoBehaviour, IKitchenObjectParent
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
+        if (!BobaShopGameManager.Instance.IsGamePlaying()) return;
+
         if (selectedCounter != null)
         {
             selectedCounter.Interact(this);
@@ -48,6 +51,8 @@ public class BobaShopPlayerController : MonoBehaviour, IKitchenObjectParent
     }
     private void GameInput_OnInteractAlternateAction(object sender, System.EventArgs e)
     {
+        if (!BobaShopGameManager.Instance.IsGamePlaying()) return;
+
         if (selectedCounter != null)
         {
             selectedCounter.InteractAlternate(this);
@@ -166,9 +171,15 @@ public class BobaShopPlayerController : MonoBehaviour, IKitchenObjectParent
         return kitchenObjectHoldPoint;
     }
 
+    // when player picks up something
     public void SetKitchenObject(KitchenObject kitchenObject)
     {
         this.kitchenObject = kitchenObject;
+
+        if (kitchenObject != null)
+        {
+            OnPickup?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public KitchenObject GetKitchenObject()
