@@ -16,14 +16,9 @@ public class DayOverUI : MonoBehaviour
         Hide();
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void BobaShopGameManager_OnStateChanged(object sender, System.EventArgs e)
     {
-        if (BobaShopGameManager.Instance.IsGameOver())
+        if (BobaShopGameManager.Instance.IsDayOver())
         {
             Show();
             int completedOrders = DeliveryManager.Instance.GetCompletedOrdersAmount();

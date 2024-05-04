@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BobaShopGameManager : MonoBehaviour
@@ -8,13 +9,15 @@ public class BobaShopGameManager : MonoBehaviour
     public static BobaShopGameManager Instance { get; private set; }
 
     public event EventHandler OnStateChanged;
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameUnpaused;
 
     private enum State
     {
         WaitingToStart,
         CountdownToStart,
         GamePlaying,
-        GameOver,
+        DayOver,
     }
 
     private State state;
@@ -22,6 +25,12 @@ public class BobaShopGameManager : MonoBehaviour
     private float countdownToStartTimer = 3f;
     private float gamePlayingTimer;
     private float gamePlayingTimerMax = 20f;
+    private bool isGamePaused = false;
+
+    private void Start()
+    {
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+    }
 
     private void Awake()
     {
@@ -54,14 +63,18 @@ public class BobaShopGameManager : MonoBehaviour
                 gamePlayingTimer -= Time.deltaTime;
                 if (gamePlayingTimer < 0f)
                 {
-                    state = State.GameOver;
+                    state = State.DayOver;
                     OnStateChanged?.Invoke(this, EventArgs.Empty);
                 }
                 break;
-            case State.GameOver:
+            case State.DayOver:
                 break;
         }
-        Debug.Log(state);
+    }
+
+    private void GameInput_OnPauseAction(object sender, EventArgs e)
+    {
+        TogglePauseGame();
     }
 
     public bool IsGamePlaying()
@@ -79,13 +92,31 @@ public class BobaShopGameManager : MonoBehaviour
         return countdownToStartTimer;
     }
 
-    public bool IsGameOver()
+    public bool IsDayOver()
     {
-        return state == State.GameOver;
+        return state == State.DayOver;
     }
 
     public float GetGamePlayingTimerNormalized()
     {
         return 1 - (gamePlayingTimer / gamePlayingTimerMax);
+    }
+
+    private void TogglePauseGame()
+    {
+        isGamePaused = !isGamePaused;
+        if (isGamePaused) 
+        {
+            Time.timeScale = 0f; // pauses all other delta.time
+
+            OnGamePaused?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            Time.timeScale = 1f; // unpause
+
+            OnGameUnpaused?.Invoke(this, EventArgs.Empty);
+        }
+        
     }
 }
