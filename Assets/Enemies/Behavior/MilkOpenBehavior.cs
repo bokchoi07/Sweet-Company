@@ -15,10 +15,17 @@ public class MilkOpenBehavior : MonoBehaviour
 
     public int damageAmount; // Amount of damage the slime deals to the player
 
+    //Audio
+    public AudioClip BreathSound; // AudioClip for the slime sound
+    private AudioSource audioSource; // Reference to the AudioSource component
+
     void Start()
     {
         // Find the player object by tag
         player = GameObject.Find("PlayerObj").transform;
+
+        // Get the AudioSource component
+        audioSource = GetComponent<AudioSource>();
 
         // Start attacking immediately
         AttackPlayer();
@@ -54,6 +61,11 @@ public class MilkOpenBehavior : MonoBehaviour
             else if (!hasTransformed && !isAttacking)
             {
                 AttackPlayer();
+            }
+            // Play the slime sound if not already playing
+            else if (!audioSource.isPlaying && BreathSound != null)
+            {
+                audioSource.PlayOneShot(BreathSound);
             }
         }
         else if (isAttacking)

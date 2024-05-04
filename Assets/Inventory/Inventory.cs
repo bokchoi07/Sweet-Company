@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
-    private int maxSpace = 10;   // Maximum amount of item spaces
+    private int maxSpace = 25;   // Maximum amount of item spaces
     public int MaxSpace
     {
         get { return maxSpace; }
