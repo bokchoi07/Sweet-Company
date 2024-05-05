@@ -5,11 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private bool isInRange = false;
+
+    public bool IsPlayerInRange()
     {
-        // display msg "ready to sell? smth like that
-        // let player confirm or go back
-        // if confirm, change scene
-        SceneManager.LoadScene(0);
+        return isInRange;
+    }
+
+    public void SetIsInRange(bool value)
+    {
+        isInRange = value;
     }
 }

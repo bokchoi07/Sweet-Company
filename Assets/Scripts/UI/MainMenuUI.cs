@@ -18,7 +18,7 @@ public class MainMenuUI : MonoBehaviour
     {
         playButton.onClick.AddListener(() => // lamba expression
         {
-            Loader.Load(Loader.Scene.BobaShop);
+            Loader.Load(Loader.Scene.Office);
         });
         howToPlayButton.onClick.AddListener(() =>
         {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DayOverUI : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class DayOverUI : MonoBehaviour
     private void Start()
     {
         BobaShopGameManager.Instance.OnStateChanged += BobaShopGameManager_OnStateChanged;
+        GameInput.Instance.OnReturnToOffice += GameInput_OnReturnToOffice;
 
         Hide();
     }
@@ -35,6 +37,10 @@ public class DayOverUI : MonoBehaviour
         }
     }
 
+    private void GameInput_OnReturnToOffice(object sender, System.EventArgs e)
+    {
+        SceneManager.LoadScene(2); // office
+    }
     private void Show()
     {
         gameObject.SetActive(true);
