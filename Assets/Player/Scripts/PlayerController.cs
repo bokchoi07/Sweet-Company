@@ -4,48 +4,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = .25f;
-    //[SerializeField] float turnSpeed = .25f;
+    [SerializeField] private float movementSpeed = 5.0f; // Movement speed of the player
+    [SerializeField] private float mouseSensitivity = 10.0f; // Sensitivity of mouse movement
 
-    Rigidbody rb = null;
+    private float verticalRotation = 0; // Rotation around the X-axis
 
-    private void Awake()
+    void Update()
     {
-        rb = GetComponent<Rigidbody>();
-    }
+        // Player Movement
+        float horizontalMovement = Input.GetAxis("Horizontal");
+        float verticalMovement = Input.GetAxis("Vertical");
 
-    private void FixedUpdate()
-    {
-        MoveVertical();
-        MoveHorizontal();
-        //Turn();
-    }
+        Vector3 movement = new Vector3(horizontalMovement, 0.0f, verticalMovement) * movementSpeed * Time.deltaTime;
+        transform.Translate(movement);
 
-    public void MoveVertical()
-    {
-        float moveAmountThisFrame = Input.GetAxis("Vertical") * moveSpeed;
-        Vector3 moveOffset = transform.forward * moveAmountThisFrame;
-        rb.MovePosition(rb.position + moveOffset);
-    }
+        // Player Rotation (Mouse Look)
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-    public void MoveHorizontal()
-    {
-        float moveAmountThisFrame = Input.GetAxis("Horizontal") * moveSpeed;
-        Vector3 moveOffset = transform.right * moveAmountThisFrame;
-        rb.MovePosition(rb.position + moveOffset);
-    }
+        verticalRotation -= mouseY;
+        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
 
-    /*public void Move()
-    {
-        float moveAmountThisFrame = Input.GetAxis("Vertical") * moveSpeed;
-        Vector3 moveOffset = transform.forward * moveAmountThisFrame;
-        rb.MovePosition(rb.position + moveOffset);
-    }*/
-
-    public void Turn()
-    {
-        /*float turnAmountThisFrame = Input.GetAxis("Horizontal") * turnSpeed;
-        Quaternion turnOffset = Quaternion.Euler(0, turnAmountThisFrame, 0);
-        rb.MoveRotation(rb.rotation * turnOffset);*/
+        transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+        transform.Rotate(Vector3.up * mouseX);
     }
 }

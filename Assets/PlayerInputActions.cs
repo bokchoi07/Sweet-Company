@@ -62,6 +62,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReturnToOffice"",
+                    ""type"": ""Button"",
+                    ""id"": ""132d9612-447b-46fb-8901-a8049f639782"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +216,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7def7845-9dde-4414-9563-0018606e92c9"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReturnToOffice"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -219,6 +239,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_InteractAlt = m_Player.FindAction("InteractAlt", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_ReturnToOffice = m_Player.FindAction("ReturnToOffice", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -284,6 +305,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_InteractAlt;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_ReturnToOffice;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -292,6 +314,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @InteractAlt => m_Wrapper.m_Player_InteractAlt;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @ReturnToOffice => m_Wrapper.m_Player_ReturnToOffice;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -313,6 +336,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @ReturnToOffice.started += instance.OnReturnToOffice;
+            @ReturnToOffice.performed += instance.OnReturnToOffice;
+            @ReturnToOffice.canceled += instance.OnReturnToOffice;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -329,6 +355,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @ReturnToOffice.started -= instance.OnReturnToOffice;
+            @ReturnToOffice.performed -= instance.OnReturnToOffice;
+            @ReturnToOffice.canceled -= instance.OnReturnToOffice;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -352,5 +381,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnInteractAlt(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnReturnToOffice(InputAction.CallbackContext context);
     }
 }

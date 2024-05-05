@@ -12,6 +12,7 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnInteractAction;
     public event EventHandler OnInteractAltAction;
     public event EventHandler OnPauseAction;
+    public event EventHandler OnReturnToOffice;
 
     private PlayerInputActions playerInputActions;
 
@@ -25,7 +26,10 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Interact.performed += Interact_performed;
         playerInputActions.Player.InteractAlt.performed += InteractAlt_performed;
         playerInputActions.Player.Pause.performed += Pause_performed;
+        playerInputActions.Player.ReturnToOffice.performed += ReturnToOffice_performed;
     }
+
+    
 
     private void OnDestroy()
     {
@@ -33,8 +37,13 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Interact.performed -= Interact_performed;
         playerInputActions.Player.InteractAlt.performed -= InteractAlt_performed;
         playerInputActions.Player.Pause.performed -= Pause_performed;
+        playerInputActions.Player.ReturnToOffice.performed -= ReturnToOffice_performed; // enter button
 
         playerInputActions.Dispose();
+    }
+    private void ReturnToOffice_performed(InputAction.CallbackContext context)
+    {
+        OnReturnToOffice?.Invoke(this, EventArgs.Empty);
     }
 
     private void Pause_performed(InputAction.CallbackContext context)
