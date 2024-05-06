@@ -1,79 +1,95 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SleepController : MonoBehaviour
 {
-    [SerializeField] private GameObject sleepCamera;
-    [SerializeField] private GameObject playerCamera;
-    [SerializeField] private GameObject fadeImageGameObject;
+    [SerializeField] private GameObject sleepingUI;
+    [SerializeField] private GameObject quotaFailedUI;
+    [SerializeField] private GameObject quotaPassedUI;
 
-    private Image fadeImage;
+    private bool isShowing = false;
 
-    private void Start()
+    private void Awake()
     {
-        fadeImage = fadeImageGameObject.GetComponent<Image>();
+        sleepingUI.SetActive(false);
+        quotaFailedUI.SetActive(false);
+        quotaPassedUI.SetActive(false);
     }
 
     private void Update()
     {
+        Debug.Log("update");
         if (Input.GetKeyDown(KeyCode.E))
         {
-            playerCamera.SetActive(false);
-            sleepCamera.SetActive(true);
-            fadeImageGameObject.SetActive(true);
-            StartFadeIn();
-        }
-        else
-        {
-            //Hide();
-        }
-    }
-
-    private IEnumerator FadeIn()
-    {
-        Debug.Log("fadein");
-        for (float i = 0f; i <= 1; i += .05f)
-        {
-            Color imageColor = fadeImage.color;
-            imageColor.a = i;
-            Debug.Log(imageColor.a);
-            yield return new WaitForSeconds(5f);
+            if (PlayerStats.Instance.getDaysLeft() == 0 && PlayerStats.Instance.isQuotaMet())
+            {
+                ShowQuotaPassed(quotaPassedUI);
+            }
+            else if (PlayerStats.Instance.getDaysLeft() == 0 && !PlayerStats.Instance.isQuotaMet())
+            {
+                ShowQuotaFailed(quotaFailedUI);
+            }
+            else
+            {
+                ShowSleeping(sleepingUI);
+            }
         }
     }
 
-    private IEnumerator FadeOut()
+    private void ShowSleeping(GameObject uiToShow)
     {
-        Debug.Log("fadeout");
-        for (float i = 1f; i >= 0f; i -= .05f)
-        {
-            Color imageColor = fadeImage.color;
-            imageColor.a = i;
-            Debug.Log(imageColor.a);
-            yield return new WaitForSeconds(3f);
-        }
+        PlayerStats.Instance.decreaseDaysLeft();
+        StartCoroutine(ShowSleepingCoroutine());
     }
 
-    private void StartFadeIn()
+    private void ShowQuotaFailed(GameObject uiToShow)
     {
-        Debug.Log("startfadein");
-        StartCoroutine(FadeIn());
-
-        StartFadeOut();
+        PlayerStats.Instance.resetDaysLeft();
+        StartCoroutine(ShowQuotaFailedCoroutine());
     }
 
-    private void StartFadeOut()
+    private void ShowQuotaPassed(GameObject uiToShow)
     {
-        Debug.Log("startfadeout");
-        StartCoroutine (FadeOut());
+        PlayerStats.Instance.resetDaysLeft();
+        PlayerStats.Instance.updateQuota();
+        StartCoroutine(ShowQuotaPassedCoroutine());
     }
 
-    private void Hide()
+    private IEnumerator ShowSleepingCoroutine()
     {
-        playerCamera.SetActive(true);
-        sleepCamera.SetActive(false);
-        fadeImageGameObject.SetActive(false);
+        sleepingUI.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        Hide(sleepingUI);
+    }
+
+    private IEnumerator ShowQuotaFailedCoroutine()
+    {
+        quotaFailedUI.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        SceneManager.LoadScene(0);
+    }
+
+    private IEnumerator ShowQuotaPassedCoroutine()
+    {
+        quotaPassedUI.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        Hide(quotaPassedUI);
+    }
+
+    private void Hide(GameObject uiToHide)
+    {
+        uiToHide.SetActive(false);
     }
 }

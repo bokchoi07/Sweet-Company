@@ -33,6 +33,11 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public bool isQuotaMet()
+    {
+        return playersProfit >= quota;
+    }
+
     public void updatePlayersProfit(int amountToAdd)
     {
         playersProfit += amountToAdd;
@@ -45,9 +50,9 @@ public class PlayerStats : MonoBehaviour
         return playersProfit;
     }
 
-    public void setNewQuota(int newQuota)
+    public void updateQuota()
     {
-        quota += newQuota;
+        quota += 20;
         setQuotaText();
     }
 
@@ -59,12 +64,12 @@ public class PlayerStats : MonoBehaviour
     public void decreaseDaysLeft()
     {
         daysLeft--;
+        setDaysLeftText();
+    }
 
-        if (daysLeft == 0)
-        {
-            Debug.Log("days left = 0");
-        }
-
+    public void resetDaysLeft()
+    {
+        daysLeft = 2;
         setDaysLeftText();
     }
 
