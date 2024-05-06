@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class OfficeGameManager : MonoBehaviour
 {
+    public static OfficeGameManager Instance { get; private set; }
+
     [SerializeField] private Door bobaShopDoor;
     [SerializeField] private Door mapDoor;
+
 
     private void Update()
     {
