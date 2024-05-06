@@ -25,11 +25,20 @@ public class DayOverUI : MonoBehaviour
             Show();
             int completedOrders = DeliveryManager.Instance.GetCompletedOrdersAmount();
             int wrongOrders = DeliveryManager.Instance.GetWrongOrdersAmount();
+
             int profit = (15 * completedOrders) - (5 * wrongOrders);
+
+            if (profit < 0)
+            {
+                profit = 0;
+            }
 
             completedOrdersText.text = completedOrdersText.text + " " + completedOrders;
             wrongOrdersText.text = wrongOrdersText.text + " " + wrongOrders;
             profitMadeText.text = profitMadeText.text + " " + profit;
+
+            // updating player's profit
+            PlayerStats.Instance.updatePlayersProfit(profit); 
         }
         else
         {
