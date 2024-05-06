@@ -56,10 +56,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrefabs:
-  - {fileID: 6152388876045700404, guid: 6b02960526741f34ba76d47623dace9a, type: 3}
-  - {fileID: 3494503411201406988, guid: 0fda395cc971b9942b534ac7d6135bcb, type: 3}
-  - {fileID: 5207768728448387611, guid: 8c45b7e2324c552439cea5b54ce7d5cf, type: 3}
-  - {fileID: 6331802516949526957, guid: c901722f7eefa6a46aac7f4756eeee32, type: 3}
+  - {fileID: 1463101529518770824, guid: 733bbca2ead465346ac8e1bcc131cea2, type: 3}
+  - {fileID: 1096084450619142852, guid: aaa6aecd8a34c2046ac45ee9f03a849c, type: 3}
+  - {fileID: 1551429929343608323, guid: c03c4125b12718c43a28a43dfb28e92d, type: 3}
+  - {fileID: 2620586107150888186, guid: 707a57ddb2075f3479141ca01915bc1b, type: 3}
 --- !u!1001 &609535389751842985
 PrefabInstance:
   m_ObjectHideFlags: 0
