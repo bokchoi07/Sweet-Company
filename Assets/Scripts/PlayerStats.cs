@@ -38,6 +38,12 @@ public class PlayerStats : MonoBehaviour
         return playersProfit >= quota;
     }
 
+    public void resetPlayersProfit()
+    {
+        playersProfit = 0;
+        setPlayersProfitText();
+    }
+
     public void updatePlayersProfit(int amountToAdd)
     {
         playersProfit += amountToAdd;
@@ -48,6 +54,12 @@ public class PlayerStats : MonoBehaviour
     public int getPlayersProfit()
     {
         return playersProfit;
+    }
+
+    public void resetQuota()
+    {
+        quota = 40;
+        setQuotaText();
     }
 
     public void updateQuota()

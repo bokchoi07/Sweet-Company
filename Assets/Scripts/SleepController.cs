@@ -24,7 +24,6 @@ public class SleepController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("update");
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (PlayerStats.Instance.getDaysLeft() == 0 && PlayerStats.Instance.isQuotaMet())
@@ -51,6 +50,8 @@ public class SleepController : MonoBehaviour
     private void ShowQuotaFailed(GameObject uiToShow)
     {
         PlayerStats.Instance.resetDaysLeft();
+        PlayerStats.Instance.resetPlayersProfit();
+        PlayerStats.Instance.resetQuota();
         StartCoroutine(ShowQuotaFailedCoroutine());
     }
 
