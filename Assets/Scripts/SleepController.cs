@@ -1,19 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Search;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SleepController : MonoBehaviour
 {
     [SerializeField] private GameObject sleepingUI;
     [SerializeField] private GameObject quotaFailedUI;
     [SerializeField] private GameObject quotaPassedUI;
-
-    private bool isShowing = false;
 
     private void Awake()
     {
