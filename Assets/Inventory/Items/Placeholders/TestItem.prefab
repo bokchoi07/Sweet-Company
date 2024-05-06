@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3fe774d70187ef48aca39585f2f42c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UncookedBobaPrefab: {fileID: 6152388876045700404, guid: 6b02960526741f34ba76d47623dace9a, type: 3}
-  TeaLeavesPrefab: {fileID: 3494503411201406988, guid: 0fda395cc971b9942b534ac7d6135bcb, type: 3}
-  MilkPrefab: {fileID: 5207768728448387611, guid: 8c45b7e2324c552439cea5b54ce7d5cf, type: 3}
-  MatchaPowderPrefab: {fileID: 6331802516949526957, guid: c901722f7eefa6a46aac7f4756eeee32, type: 3}
+  UncookedBobaPrefab: {fileID: 4161409073252222749, guid: 8d72324d10d07904a92eb8a300ba270a, type: 3}
+  TeaLeavesPrefab: {fileID: 4294755814414215301, guid: 6fa1618dcca57d7459cc617d3da8191f, type: 3}
+  MilkPrefab: {fileID: 7596399468873837586, guid: 148dc0fcd74ee034dae35d481e16a10d, type: 3}
+  MatchaPowderPrefab: {fileID: 8469327399404026009, guid: c0416cd808c8feb4d8690af71b6e9d60, type: 3}
   itemType: 0
 --- !u!1 &4199156081640340333
 GameObject:
