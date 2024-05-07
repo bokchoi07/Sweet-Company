@@ -10,9 +10,14 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button howToPlayButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private Button backButton;
-
     [SerializeField] private GameObject howToPlayPage;
 
+    private AudioSource buttonPressedSFX;
+
+    private void Start()
+    {
+        buttonPressedSFX = GetComponent<AudioSource>();
+    }
 
     private void Awake()
     {
@@ -22,6 +27,7 @@ public class MainMenuUI : MonoBehaviour
         });
         howToPlayButton.onClick.AddListener(() =>
         {
+            PlayButtonPressedSFX();
             ShowHowToPlayPage();
         });
         quitButton.onClick.AddListener(() => 
@@ -30,10 +36,16 @@ public class MainMenuUI : MonoBehaviour
         });
         backButton.onClick.AddListener(() =>
         {
+            PlayButtonPressedSFX();
             HideHowToPlayPage();
         });
 
         Time.timeScale = 1f; // resetting time
+    }
+
+    private void PlayButtonPressedSFX()
+    {
+        buttonPressedSFX.Play();
     }
 
     private void ShowHowToPlayPage()

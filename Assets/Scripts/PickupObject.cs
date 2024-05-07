@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PickupObject : MonoBehaviour
@@ -6,7 +7,7 @@ public class PickupObject : MonoBehaviour
     public KeyCode pickupKey = KeyCode.E; // Key to press to pick up the object
     public Sprite itemIcon; // Icon representing the item in the inventory
     public GameObject promptUI; // UI element to display the pickup prompt
-
+ 
     private bool isInRange = false;
     public GameObject player;
     private bool isPickedUp = false;
