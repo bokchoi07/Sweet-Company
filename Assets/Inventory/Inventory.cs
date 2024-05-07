@@ -18,6 +18,7 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallback;
 
     private int maxSpace = 25;   // Maximum amount of item spaces
+    private AudioSource audioSource;
     public int MaxSpace
     {
         get { return maxSpace; }
@@ -26,6 +27,11 @@ public class Inventory : MonoBehaviour
             maxSpace = value;
             UpdateInventoryUI();
         }
+    }
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Our current list of items in the inventory
@@ -39,6 +45,8 @@ public class Inventory : MonoBehaviour
             Debug.Log("Inventory is full.");
             return;
         }
+
+        audioSource.Play();
 
         Item newItem = new Item(itemName, itemIcon);
         items.Add(newItem);

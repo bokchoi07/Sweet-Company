@@ -21,10 +21,12 @@ public class SleepController : MonoBehaviour
         {
             if (PlayerStats.Instance.getDaysLeft() == 0 && PlayerStats.Instance.isQuotaMet())
             {
+                quotaPassedUI.GetComponent<AudioSource>().Play();
                 ShowQuotaPassed(quotaPassedUI);
             }
             else if (PlayerStats.Instance.getDaysLeft() == 0 && !PlayerStats.Instance.isQuotaMet())
             {
+                quotaFailedUI.GetComponent<AudioSource>().Play();
                 ShowQuotaFailed(quotaFailedUI);
             }
             else
