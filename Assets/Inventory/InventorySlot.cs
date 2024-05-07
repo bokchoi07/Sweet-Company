@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 /* Sits on all InventorySlots. */
 
@@ -45,5 +46,9 @@ public class InventorySlot : MonoBehaviour {
 			item.Use();
 		}
 	}
-
+    // Quit to the main menu
+    public void QuitToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }

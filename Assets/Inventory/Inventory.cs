@@ -56,6 +56,13 @@ public class Inventory : MonoBehaviour
             onItemChangedCallback.Invoke();
     }
 
+    // Clear the inventory
+    public void ClearInventory()
+    {
+        items.Clear();
+        UpdateInventoryUI();
+    }
+
     // Update the inventory UI
     private void UpdateInventoryUI()
     {

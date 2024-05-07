@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth; // Current health of the player
 
     public HealthBar healthBar;
+    public Inventory playerInventory; // Reference to the player's inventory
+    public AudioSource deathSound; // Reference to the audio source for death sound
 
     private void Start()
     {
@@ -30,8 +33,18 @@ public class PlayerHealth : MonoBehaviour
     // Method to handle player's death
     private void Die()
     {
-        // You can add any death-related logic here, such as game over, respawn, etc.
+        // Play death sound
+        if (deathSound != null)
+        {
+            deathSound.Play();
+        }
+        // Clear the inventory when the player dies
+        playerInventory.ClearInventory();
+
         Debug.Log("Player has died!");
+
+        // Transition to the Office scene
+        SceneManager.LoadScene("Office");
     }
 }
 
